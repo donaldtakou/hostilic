@@ -41,14 +41,16 @@ export default function VideoPlayer({ url, thumbnail, title, className = "" }: V
           )}
         </div>
       ) : (
-        <ReactPlayer
-          url={url}
-          playing={playing}
-          controls
-          width="100%"
-          height="100%"
-          className="react-player"
-        />
+        <div className="aspect-video">
+          <ReactPlayer
+            url={url}
+            playing={playing}
+            controls={true}
+            width="100%"
+            height="100%"
+            className="react-player"
+          />
+        </div>
       )}
     </div>
   )

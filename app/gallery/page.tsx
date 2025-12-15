@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { motion } from "framer-motion"
-import { X, Play, Image as ImageIcon } from "lucide-react"
+import { X, Image as ImageIcon } from "lucide-react"
 import ImageCarousel from "@/components/ImageCarousel"
 
 const galleryItems = [
@@ -162,20 +162,13 @@ export default function GalleryPage() {
             >
               <div className="aspect-video bg-gray-200">
                 <img
-                  src={item.type === "image" ? item.src : item.thumbnail}
+                  src={item.src}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
-                    e.currentTarget.src = "https://via.placeholder.com/600x400?text=M2H2"
+                    e.currentTarget.src = "https://via.placeholder.com/600x400?text=M2HC"
                   }}
                 />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                {item.type === "video" && (
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                    <Play className="h-8 w-8 text-blue-600 ml-1" />
-                  </div>
-                )}
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
                 <p className="text-white font-semibold">{item.title}</p>
@@ -197,24 +190,14 @@ export default function GalleryPage() {
               <X className="h-6 w-6 text-white" />
             </button>
             <div className="max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
-              {lightboxItem.type === "image" ? (
-                <img
-                  src={lightboxItem.src}
-                  alt={lightboxItem.title}
-                  className="w-full h-auto rounded-lg"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://via.placeholder.com/1200x800?text=M2H2"
-                  }}
-                />
-              ) : (
-                <div className="aspect-video bg-black rounded-lg">
-                  <iframe
-                    src={lightboxItem.src.replace("watch?v=", "embed/")}
-                    className="w-full h-full rounded-lg"
-                    allowFullScreen
-                  />
-                </div>
-              )}
+              <img
+                src={lightboxItem.src}
+                alt={lightboxItem.title}
+                className="w-full h-auto rounded-lg"
+                onError={(e) => {
+                  e.currentTarget.src = "https://via.placeholder.com/1200x800?text=M2HC"
+                }}
+              />
               <p className="text-white text-center mt-4 text-lg font-semibold">
                 {lightboxItem.title}
               </p>
