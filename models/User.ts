@@ -1,0 +1,49 @@
+import mongoose, { Schema, models } from 'mongoose'
+
+export interface IUser {
+  _id: string
+  name: string
+  email: string
+  password?: string
+  image?: string
+  role: 'USER' | 'VOLUNTEER' | 'ADMIN'
+  emailVerified?: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+const UserSchema = new Schema<IUser>(
+  {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      unique: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: ['USER', 'VOLUNTEER', 'ADMIN'],
+      default: 'USER',
+    },
+    emailVerified: {
+      type: Date,
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+
+const User = models.User || mongoose.model<IUser>('User', UserSchema)
+
+export default User
