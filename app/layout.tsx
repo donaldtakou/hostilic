@@ -7,9 +7,9 @@ import AuthProvider from "@/components/AuthProvider";
 import Chatbot from "@/components/Chatbot";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter({
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: "--font-inter",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
