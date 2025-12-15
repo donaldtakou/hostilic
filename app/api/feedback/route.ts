@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/mongodb"
-import Feedback from "@/models/Feedback"
+import { FeedbackModel } from "@/lib/db"
 import { z } from "zod"
 
 const feedbackSchema = z.object({
@@ -12,17 +11,15 @@ const feedbackSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    await dbConnect()
-    
     const body = await req.json()
     const data = feedbackSchema.parse(body)
 
-    const feedback = await Feedback.create({
+    const feedback = await FeedbackModel.create({
       name: data.name,
       email: data.email,
       rating: data.rating,
       message: data.message,
-      status: "PENDING",
+      approved: false,
     })
 
     return NextResponse.json(
@@ -52,23 +49,23 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    await dbConnect()
-    
     const { searchParams } = new URL(req.url)
     const limit = parseInt(searchParams.get("limit") || "10")
-    const featured = searchParams.get("featured") === "true"
 
-    const query: any = { approved: true }
-    if (featured) {
-      query.featured = true
-    }
+    const feedbacks = await FeedbackModel.findAll({ approved: true })
+    
+    // Trier par date et limiter
+    const sortedFeedbacks = feedbacks
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, limit)
+      .map(f => ({
+        name: f.name,
+        rating: f.rating,
+        message: f.message,
+        createdAt: f.createdAt
+      }))
 
-    const feedbacks = await Feedback.find(query)
-      .sort({ featured: -1, createdAt: -1 })
-      .limit(limit)
-      .select('name rating message createdAt')
-
-    return NextResponse.json({ feedbacks }, { status: 200 })
+    return NextResponse.json({ feedbacks: sortedFeedbacks }, { status: 200 })
   } catch (error) {
     console.error("Get feedbacks error:", error)
     return NextResponse.json(

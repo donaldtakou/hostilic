@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/mongodb"
-import ContactMessage from "@/models/ContactMessage"
+import { ContactMessageModel } from "@/lib/db"
 import { z } from "zod"
 
 const contactSchema = z.object({
@@ -13,17 +12,15 @@ const contactSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    await dbConnect()
-    
     const body = await req.json()
     const data = contactSchema.parse(body)
 
-    const contact = await ContactMessage.create({
+    const contact = await ContactMessageModel.create({
       name: data.name,
       email: data.email,
-      phone: data.phone,
       subject: data.subject,
       message: data.message,
+      status: 'new',
     })
 
     return NextResponse.json(

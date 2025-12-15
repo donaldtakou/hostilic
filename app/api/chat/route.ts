@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { generateChatResponse, detectFAQ, ChatMessage as ChatMessageType } from '@/lib/chatbot';
-import ChatMessage from '@/models/ChatMessage';
-import { connectDB } from '@/lib/mongodb';
+import { ChatMessageModel } from '@/lib/db';
 
 // Schéma de validation
 const chatRequestSchema = z.object({
@@ -35,33 +34,12 @@ export async function POST(req: NextRequest) {
     // Générer la réponse avec le chatbot intelligent (gratuit, sans API)
     const response = await generateChatResponse(conversationHistory, currentSessionId);
 
-    // Essayer de sauvegarder dans MongoDB (ne pas bloquer si ça échoue)
-    try {
-      await connectDB();
-      await ChatMessage.create({
-        sessionId: currentSessionId,
-        role: 'user',
-        content: message,
-        userId,
-        timestamp: new Date(),
-      });
-
-      // Sauvegarder la réponse du bot
-      await ChatMessage.create({
-        sessionId: currentSessionId,
-        role: 'assistant',
-        content: response.message,
-        userId,
-        timestamp: new Date(),
-        metadata: {
-          model: 'intelligent-bot-v1',
-          tokens: 0,
-        },
-      });
-    } catch (dbError) {
-      // MongoDB non disponible, continuer sans sauvegarder
-      console.log('MongoDB non disponible, chatbot fonctionne sans historique');
-    }
+    // Sauvegarder dans la base en mémoire
+    await ChatMessageModel.create({
+      message: message,
+      response: response.message,
+      sessionId: currentSessionId,
+    });
 
     return NextResponse.json({
       success: true,

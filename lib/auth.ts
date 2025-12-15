@@ -1,8 +1,7 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
-import dbConnect from "./mongodb"
-import User from "@/models/User"
+import { UserModel } from "./db"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -17,9 +16,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email et mot de passe requis")
         }
 
-        await dbConnect()
-
-        const user = await User.findOne({ email: credentials.email })
+        const user = await UserModel.findOne({ email: credentials.email })
 
         if (!user || !user.password) {
           throw new Error("Identifiants invalides")

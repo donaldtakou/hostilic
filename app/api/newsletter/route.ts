@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/mongodb"
-import Newsletter from "@/models/Newsletter"
+import { NewsletterModel } from "@/lib/db"
 import { z } from "zod"
 
 const newsletterSchema = z.object({
@@ -10,13 +9,11 @@ const newsletterSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    await dbConnect()
-    
     const body = await req.json()
     const { email, name } = newsletterSchema.parse(body)
 
     // Vérifier si l'email existe déjà
-    const existing = await Newsletter.findOne({ email })
+    const existing = await NewsletterModel.findOne({ email })
 
     if (existing) {
       if (existing.active) {
@@ -36,9 +33,8 @@ export async function POST(req: Request) {
     }
 
     // Créer un nouvel abonnement
-    await Newsletter.create({
+    await NewsletterModel.create({
       email,
-      name: name || undefined,
     })
 
     return NextResponse.json(

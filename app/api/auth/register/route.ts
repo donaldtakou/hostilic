@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/mongodb"
-import User from "@/models/User"
+import { UserModel } from "@/lib/db"
 import bcrypt from "bcryptjs"
 import { z } from "zod"
 
@@ -12,13 +11,11 @@ const registerSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    await dbConnect()
-    
     const body = await req.json()
     const { name, email, password } = registerSchema.parse(body)
 
     // Vérifier si l'utilisateur existe déjà
-    const existingUser = await User.findOne({ email })
+    const existingUser = await UserModel.findOne({ email })
 
     if (existingUser) {
       return NextResponse.json(
@@ -31,10 +28,11 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 12)
 
     // Créer l'utilisateur
-    const user = await User.create({
+    const user = await UserModel.create({
       name,
       email,
       password: hashedPassword,
+      role: 'user',
     })
 
     return NextResponse.json(
