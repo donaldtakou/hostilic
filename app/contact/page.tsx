@@ -212,7 +212,7 @@ export default function ContactPage() {
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
                     <p className="text-gray-600">Carte interactive</p>
-                    <p className="text-sm text-gray-500">123 Rue de la Solidarité, Paris</p>
+                    <p className="text-sm text-gray-500">Odza , entree Kowait MH2C</p>
                   </div>
                 </div>
                 <div className="p-6">
