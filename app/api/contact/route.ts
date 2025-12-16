@@ -23,11 +23,24 @@ export async function POST(req: Request) {
       status: 'new',
     })
 
+    // Log du message pour consultation
+    console.log('📧 NOUVEAU MESSAGE DE CONTACT REÇU:')
+    console.log('═══════════════════════════════════')
+    console.log(`De: ${data.name} (${data.email})`)
+    console.log(`Sujet: ${data.subject}`)
+    console.log(`Message: ${data.message}`)
+    console.log(`Téléphone: ${data.phone || 'Non fourni'}`)
+    console.log(`Date: ${new Date().toLocaleString('fr-FR')}`)
+    console.log('═══════════════════════════════════\n')
+
     return NextResponse.json(
       { 
         message: "Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.",
         contact: {
           id: contact._id.toString(),
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
         }
       },
       { status: 201 }
@@ -41,6 +54,36 @@ export async function POST(req: Request) {
     }
 
     console.error("Contact error:", error)
+    return NextResponse.json(
+      { error: "Une erreur est survenue" },
+      { status: 500 }
+    )
+  }
+}
+
+export async function GET(req: Request) {
+  try {
+    const messages = await ContactMessageModel.findAll()
+    
+    // Trier par date décroissante
+    const sortedMessages = messages
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .map(m => ({
+        id: m._id,
+        name: m.name,
+        email: m.email,
+        subject: m.subject,
+        message: m.message,
+        status: m.status,
+        createdAt: m.createdAt
+      }))
+
+    return NextResponse.json({ 
+      messages: sortedMessages,
+      count: sortedMessages.length 
+    }, { status: 200 })
+  } catch (error) {
+    console.error("Get contacts error:", error)
     return NextResponse.json(
       { error: "Une erreur est survenue" },
       { status: 500 }

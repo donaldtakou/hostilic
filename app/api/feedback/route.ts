@@ -59,6 +59,7 @@ export async function GET(req: Request) {
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice(0, limit)
       .map(f => ({
+        id: f._id,
         name: f.name,
         rating: f.rating,
         message: f.message,

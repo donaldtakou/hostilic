@@ -50,17 +50,19 @@ export default function ImageCarousel({
                 className="w-full h-full object-cover"
               />
               {(item.title || item.description) && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-8">
-                  {item.title && (
-                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-2">
-                      {item.title}
-                    </h3>
-                  )}
-                  {item.description && (
-                    <p className="text-white/90 text-lg max-w-2xl">
-                      {item.description}
-                    </p>
-                  )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-end">
+                  <div className="p-6 md:p-8 lg:p-12 w-full">
+                    {item.title && (
+                      <h3 className="text-white text-xl md:text-2xl lg:text-4xl font-bold mb-2 md:mb-3 drop-shadow-2xl">
+                        {item.title}
+                      </h3>
+                    )}
+                    {item.description && (
+                      <p className="text-white/95 text-sm md:text-base lg:text-lg max-w-2xl drop-shadow-xl">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

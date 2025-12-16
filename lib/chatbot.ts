@@ -1,4 +1,4 @@
-// Chatbot intelligent basé sur pattern matching (100% GRATUIT, sans API)
+// Chatbot intelligent M2HC basé sur pattern matching
 
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -12,213 +12,336 @@ export interface ChatResponse {
 }
 
 /**
- * Base de connaissances M2H2
+ * Base de connaissances M2HC (Marguerita Holistic Health Center)
  */
 const KNOWLEDGE_BASE = {
   about: {
-    keywords: ['qui', 'quoi', 'c\'est quoi', 'présentation', 'about', 'm2h2', 'ong', 'organisation'],
-    response: `**M2H2** est une ONG camerounaise dédiée à l'accompagnement des jeunes et des personnes âgées. 🌟
+    keywords: ['qui', 'quoi', 'c\'est quoi', 'présentation', 'about', 'm2hc', 'marguerita', 'holistic', 'health', 'organisation'],
+    response: `**M2HC - Marguerita Holistic Health Center**
 
-🎯 **Notre Mission**:
-Accompagner et soutenir les jeunes et les personnes âgées dans leur développement personnel et social.
+Organisation de santé holistique au Cameroun dédiée au bien-être global.
 
-💙 **Nos Valeurs**:
-- Solidarité intergénérationnelle
-- Dignité et respect
-- Innovation sociale
-- Transparence
+**Notre Mission**:
+Accompagnement holistique des personnes pour leur bien-être physique, mental, émotionnel et social.
 
-📍 **Localisation**: Yaoundé, Cameroun
+**Nos Valeurs**:
+- Dignité humaine
+- Approche holistique
+- Autonomisation
+- Empathie et écoute
+- Équité et inclusion
+- Intégrité et professionnalisme
 
-Pour en savoir plus, visitez [notre page À propos](/about) !`,
+**Chiffres clés**:
+- 1000+ personnes accompagnées
+- 4.8/5 satisfaction client
+- 10+ partenaires actifs
+
+Pour en savoir plus, visitez [notre page À propos](/about).`,
   },
   
   donation: {
-    keywords: ['don', 'donner', 'donation', 'aider financièrement', 'contribuer', 'soutenir', 'argent'],
-    response: `Pour faire un don à M2H2, c'est très simple ! 🎁
+    keywords: ['don', 'donner', 'donation', 'aider financièrement', 'contribuer', 'soutenir', 'argent', 'compte', 'bancaire'],
+    response: `**Comment faire un don à M2HC**
 
-**Étapes**:
-1. 🌐 Rendez-vous sur [/donate](/donate)
-2. 💰 Choisissez votre montant (libre ou suggéré)
-3. 💳 Sélectionnez votre moyen de paiement:
-   - 📱 **Orange Money** (CamPay)
-   - 📱 **MTN Money** (CamPay)
-   - 💳 **Carte bancaire** (Visa, Mastercard, AMEX)
-4. ✅ Confirmez et recevez votre reçu par email
+**Via le site web**:
+1. Rendez-vous sur [/donate](/donate)
+2. Choisissez votre montant
+3. Paiement en ligne sécurisé
+4. Reçu par email
 
-**Options**:
+**Virement bancaire**:
+Compte: **679 012 650 01**
+Ecobank Cameroun
+
+**Mobile Money**:
+Orange Money / MTN Mobile Money
+(Disponible sur demande)
+
+**Options de don**:
 - Don ponctuel
-- Don mensuel (abonnement)
+- Don mensuel
+- Parrainage de programme
 
-🔒 **100% sécurisé** - Tous les dons contribuent directement à nos programmes !`,
+Tous les dons contribuent directement à nos actions de santé holistique.`,
   },
 
   payment: {
-    keywords: ['paiement', 'payer', 'orange', 'mtn', 'carte', 'visa', 'mastercard', 'moyens de paiement'],
-    response: `Nous acceptons plusieurs moyens de paiement pour votre confort ! 💳
+    keywords: ['paiement', 'payer', 'orange', 'mtn', 'carte', 'visa', 'mastercard', 'moyens de paiement', 'ecobank'],
+    response: `**Moyens de paiement acceptés**
 
-**📱 Mobile Money** (via CamPay):
+**Virement Bancaire**:
+Compte: **679 012 650 01**
+Ecobank Cameroun
+
+**Mobile Money**:
 - Orange Money
-- MTN Money
+- MTN Mobile Money
 - Paiement instantané et sécurisé
 
-**💳 Cartes Bancaires** (via Stripe):
-- Visa
-- Mastercard
-- American Express
-- Protection 3D Secure
+**Paiement en ligne** (via le site):
+Traitement sécurisé avec reçu automatique
 
-**🔒 Sécurité**:
+**Sécurité**:
 - Transactions cryptées
 - Reçu fiscal automatique
-- Aucune donnée stockée
+- Aucune donnée bancaire stockée
 
-Tous nos paiements sont traités par des partenaires certifiés ! ✅`,
-  },
-
-  volunteer: {
-    keywords: ['bénévole', 'benevole', 'volontaire', 'volunteer', 'rejoindre', 'participer', 'engagement'],
-    response: `Merci pour votre intérêt à rejoindre notre équipe ! 🙌
-
-**Comment devenir bénévole ?**
-
-1. 📋 Consultez nos programmes sur [/programs](/programs)
-2. ✍️ Remplissez le formulaire de candidature
-3. 📞 Notre équipe vous contactera sous 48h
-4. 🤝 Entretien et orientation
-5. 🎓 Formation selon votre mission
-6. 🚀 C'est parti !
-
-**Profils recherchés**:
-- Animateurs sociaux
-- Formateurs professionnels
-- Professionnels de santé
-- Entrepreneurs/Mentors
-- Retraités motivés
-- Étudiants engagés
-
-📧 **Contact**: benevole@m2h2.org`,
+Tous nos paiements sont traités de manière sécurisée.`,
   },
 
   youth_programs: {
-    keywords: ['jeune', 'jeunes', 'formation', 'entrepreneur', 'emploi', 'métier', 'carrière', 'étudiant'],
-    response: `Nos programmes pour les **jeunes** (15-35 ans) 🎓:
+    keywords: ['jeune', 'jeunes', 'formation', 'adolescent', 'étudiant', 'youth', 'santé mentale', 'ados'],
+    response: `**Programmes pour les jeunes**
 
-**✅ Formation Professionnelle**
-- Métiers du numérique (développement, design, marketing digital)
-- Artisanat et commerce
-- Agriculture moderne et agro-business
+**Santé Holistique Jeunesse**:
+- Accompagnement psychologique
+- Gestion du stress et des émotions
+- Développement personnel
+- Leadership et confiance en soi
 
-**✅ Accompagnement Entrepreneuriat**
-- Élaboration de business plan
-- Micro-crédits et financement
-- Mentorat par des entrepreneurs
-- Mise en réseau
+**Éducation et Sensibilisation**:
+- Santé reproductive
+- Prévention des violences
+- Droits des jeunes
+- Hygiène de vie
 
-**✅ Développement Personnel**
-- Leadership et soft skills
-- Orientation professionnelle
-- Gestion de projet
-- Confiance en soi
+**Ateliers Pratiques**:
+- Art-thérapie
+- Sport et bien-être
+- Méditation et relaxation
+- Groupes de parole
 
-📍 **S'inscrire**: [/programs](/programs)
-📧 **Contact**: jeunes@m2h2.org`,
+Journée Internationale de la Jeunesse organisée chaque année.
+
+Plus d'infos: [/programs](/programs)
+Email: mholistichealthcenter@gmail.com`,
   },
 
-  senior_programs: {
-    keywords: ['âgé', 'age', 'personne âgée', 'senior', 'vieux', 'retraité', 'elderly'],
-    response: `Nos programmes pour les **personnes âgées** (60+ ans) 👴👵:
+  health_programs: {
+    keywords: ['santé', 'holistique', 'campagne', 'consultation', 'médical', 'soins', 'handicap', 'déplacés', 'noso', 'covid'],
+    response: `**Programmes de Santé Holistique**
 
-**✅ Santé et Bien-être**
+**Campagnes de Santé**:
+- Interventions en zones rurales et urbaines
 - Consultations médicales gratuites
-- Aide à domicile
-- Nutrition adaptée
-- Suivi médical régulier
+- Dépistage et prévention
+- Distribution de médicaments
 
-**✅ Lien Social**
-- Activités intergénérationnelles
-- Clubs seniors (jeux, lecture, arts)
-- Sorties et loisirs
-- Événements festifs
+**Accompagnement Spécialisé**:
+- Personnes en situation de handicap
+- Personnes déplacées internes (NOSO)
+- Santé mentale et psychologique
+- Soutien nutritionnel
+- Réarmement moral du personnel de santé
 
-**✅ Soutien Matériel**
-- Aide alimentaire mensuelle
-- Équipements médicaux (cannes, fauteuils)
-- Rénovation logement
-- Vêtements et couvertures
+**Prévention et Sensibilisation**:
+- Hygiène et assainissement
+- Maladies chroniques
+- Santé reproductive
+- Premiers secours
 
-💙 **Contact**: seniors@m2h2.org
-📍 **Inscription**: [/programs](/programs)`,
+**Chiffres**:
+- 7+ zones d'intervention
+- 1000+ personnes accompagnées
+
+Plus d'infos: [/programs](/programs)`,
+  },
+
+  women_programs: {
+    keywords: ['femme', 'femmes', 'woman', 'genre', 'violences', 'autonomisation', 'empowerment', '16 jours'],
+    response: `**Programmes pour les femmes**
+
+**Journées Thématiques**:
+- Journée Internationale de la Femme
+- Journée de la Femme Africaine
+- 16 Jours d'Activisme contre les Violences Basées sur le Genre
+
+**Accompagnement**:
+- Autonomisation économique
+- Santé reproductive
+- Lutte contre les violences
+- Leadership féminin
+
+**Sensibilisation**:
+- Droits des femmes
+- Égalité de genre
+- Empowerment
+- Santé holistique
+
+Célébration et autonomisation des femmes.
+
+Voir nos actions: [Galerie](/gallery)
+Plus d'infos: [/programs](/programs)`,
+  },
+
+  family_programs: {
+    keywords: ['famille', 'enfant', 'enfants', 'parents', 'familial', 'scolaire', 'éducation'],
+    response: `**Programmes Famille et Enfants**
+
+**Journées Thématiques**:
+- Journée Internationale de la Famille
+- Journée de l'Enfant Africain
+- Remise de Dons Scolaires
+
+**Soutien Familial**:
+- Accompagnement parental
+- Cohésion familiale
+- Médiation familiale
+- Santé holistique de la famille
+
+**Éducation des Enfants**:
+- Fournitures scolaires
+- Soutien éducatif
+- Droits de l'enfant
+- Bien-être des enfants
+
+Célébration des liens familiaux.
+
+Voir nos actions: [Galerie](/gallery)`,
+  },
+
+  events: {
+    keywords: ['événement', 'journée', 'célébration', 'activité', 'programme', 'action'],
+    response: `**Événements et Journées Thématiques**
+
+**Femmes**:
+- Journée Internationale de la Femme
+- Journée de la Femme Africaine
+- 16 Jours d'Activisme contre les VBG
+
+**Famille**:
+- Journée Internationale de la Famille
+- Journée de l'Enfant Africain
+
+**Droits Humains**:
+- Journée des Droits de l'Homme
+- Journée des Personnes en Situation de Handicap
+
+**Jeunesse**:
+- Journée Internationale de la Jeunesse
+
+Voir toutes nos photos: [Galerie](/gallery)
+Plus d'infos: [/programs](/programs)`,
   },
 
   contact: {
-    keywords: ['contact', 'joindre', 'appeler', 'email', 'téléphone', 'adresse', 'bureau'],
-    response: `📞 **Contactez-nous** - Nous sommes là pour vous !
+    keywords: ['contact', 'joindre', 'appeler', 'email', 'téléphone', 'adresse', 'bureau', 'localisation'],
+    response: `**Contactez M2HC**
 
-**📧 Email**:
-- Général: contact@m2h2.org
-- Dons: dons@m2h2.org
-- Bénévolat: benevole@m2h2.org
-- Programmes Jeunes: jeunes@m2h2.org
-- Programmes Seniors: seniors@m2h2.org
+**Email**:
+mholistichealthcenter@gmail.com
 
-**📱 Téléphone**:
-+237 6XX XXX XXX (Lu-Ve: 8h-17h)
+**Compte Bancaire**:
+679 012 650 01
+Ecobank Cameroun
 
-**📍 Adresse**:
-Yaoundé, Cameroun
+**Adresse**:
+Cameroun
 
-**🌐 Réseaux Sociaux**:
-- Facebook: @M2H2ONG
-- Twitter: @M2H2_ONG
-- Instagram: @m2h2ong
+**Liens utiles**:
+- Nos [Programmes](/programs)
+- Notre [Galerie](/gallery)
+- [Témoignages](/testimonials)
+- [Formulaire de contact](/contact)
 
-Ou utilisez notre [formulaire de contact](/contact) ! ✉️`,
+Nous répondons sous 24-48h.`,
   },
 
   help: {
-    keywords: ['aide', 'aider', 'help', 'comment', 'puis-je', 'participer', 'soutenir'],
-    response: `Plusieurs façons de nous aider ! 💪
+    keywords: ['aide', 'aider', 'help', 'comment', 'puis-je', 'participer', 'soutenir', 'bénévole', 'volontaire'],
+    response: `**Comment soutenir M2HC**
 
-**💰 Faire un Don**
+**Faire un Don**:
 Contribuez financièrement via [/donate](/donate)
+Compte: 679 012 650 01
 
-**🙋 Devenir Bénévole**
-Donnez de votre temps et compétences
+**Parrainer un Programme**:
+- Campagnes de santé
+- Journées thématiques
+- Dons scolaires
 
-**🤝 Parrainer un Programme**
-Sponsorisez une formation ou un événement
+**Partager nos Actions**:
+Parlez de M2HC sur les réseaux sociaux
+Consultez notre [Galerie](/gallery)
 
-**📢 Partager nos Actions**
-Parlez de nous sur les réseaux sociaux
+**Don en Nature**:
+- Matériel médical
+- Fournitures scolaires
+- Vêtements et couvertures
 
-**🎁 Don en Nature**
-Matériel, vêtements, équipements
+**Partenariat Institutionnel**:
+Collaborations avec organisations
+Voir nos [Partenaires](/about)
 
-**🏢 Partenariat d'Entreprise**
-Collaborations RSE
+Chaque geste compte.
 
-Chaque geste compte ! 💙
-
-👉 Plus d'infos: contact@m2h2.org`,
+Contact: mholistichealthcenter@gmail.com`,
   },
 
   navigation: {
-    keywords: ['page', 'site', 'trouver', 'où', 'navigation', 'menu'],
-    response: `🗺️ **Navigation du site M2H2**:
+    keywords: ['page', 'site', 'trouver', 'où', 'navigation', 'menu', 'galerie', 'témoignage', 'blog'],
+    response: `**Navigation du site M2HC**
 
 **Pages principales**:
-- 🏠 [Accueil](/) - Présentation générale
-- 📖 [À propos](/about) - Notre histoire et mission
-- 🎯 [Programmes](/programs) - Nos actions et inscriptions
-- 💝 [Faire un don](/donate) - Contribuer financièrement
-- 📰 [Actualités](/blog) - Blog et nouvelles
-- 🖼️ [Galerie](/gallery) - Photos et vidéos
-- 💬 [Témoignages](/testimonials) - Retours d'expérience
-- 📧 [Contact](/contact) - Nous joindre
-- 🔐 [Connexion](/auth/login) - Espace membre
+- [Accueil](/) - Présentation et actualités
+- [À propos](/about) - Notre mission et valeurs
+- [Programmes](/programs) - Nos 5 axes stratégiques
+- [Faire un don](/donate) - Soutenir nos actions
+- [Blog](/blog) - Actualités et articles
+- [Galerie](/gallery) - Photos de nos interventions
+- [Témoignages](/testimonials) - Retours d'expérience
+- [Contact](/contact) - Nous joindre
 
-Besoin d'aide sur une page spécifique ? 😊`,
+**Chiffres clés**:
+- 1000+ personnes accompagnées
+- 10+ partenaires actifs
+- 7+ zones d'intervention
+- 4.8/5 satisfaction
+
+Besoin d'aide? Posez votre question.`,
+  },
+
+  gallery: {
+    keywords: ['photo', 'photos', 'image', 'images', 'galerie', 'voir', 'album'],
+    response: `**Galerie M2HC** - Découvrez nos actions en images
+
+**Collections disponibles**:
+- Événements & Journées thématiques
+- Campagnes de Santé Holistique
+- Actions Communautaires
+- M2HC et les Institutions
+- M2HC à l'International
+- Programmes Jeunesse et Famille
+
+**Événements récents**:
+- 16 Jours d'Activisme contre les VBG
+- Journée de la Femme
+- Prise en charge personnes déplacées NOSO
+- Remise de dons scolaires
+
+Visitez la [Galerie complète](/gallery) pour voir toutes nos photos.`,
+  },
+
+  testimonials: {
+    keywords: ['témoignage', 'témoignages', 'avis', 'expérience', 'retour', 'satisfaction'],
+    response: `**Témoignages M2HC**
+
+**Satisfaction client**:
+- 4.8/5 de satisfaction
+- 95% de clients satisfaits
+- 1000+ personnes accompagnées
+
+**Ce que disent nos bénéficiaires**:
+- Accompagnement professionnel et bienveillant
+- Approche holistique efficace
+- Équipe à l'écoute
+- Impact réel sur le bien-être
+
+**Partagez votre expérience**:
+Laissez un témoignage et inspirez d'autres personnes dans leur parcours de guérison.
+
+Consultez les [Témoignages](/testimonials) et laissez le vôtre.`,
   },
 };
 
@@ -228,9 +351,9 @@ Besoin d'aide sur une page spécifique ? 😊`,
 const GREETINGS = {
   keywords: ['bonjour', 'bonsoir', 'salut', 'hello', 'hi', 'hey', 'coucou'],
   responses: [
-    "Bonjour ! 👋 Comment puis-je vous aider aujourd'hui ?",
-    "Bonjour et bienvenue sur M2H2 ! 🌟 Comment puis-je vous assister ?",
-    "Salut ! 😊 Je suis là pour répondre à vos questions sur M2H2. Que voulez-vous savoir ?",
+    "Bonjour. Bienvenue sur M2HC. Comment puis-je vous aider aujourd'hui?",
+    "Bonjour et bienvenue sur M2HC - Marguerita Holistic Health Center. Comment puis-je vous assister?",
+    "Salut. Je suis là pour répondre à vos questions sur M2HC. Que voulez-vous savoir?",
   ],
 };
 
@@ -240,10 +363,10 @@ const GREETINGS = {
 const THANKS = {
   keywords: ['merci', 'thanks', 'thank you', 'cool', 'super', 'génial', 'parfait'],
   responses: [
-    "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions !",
-    "De rien ! 💙 Je suis là pour vous aider !",
-    "Ravi d'avoir pu vous aider ! ✨ À votre service !",
-    "Content que ça vous aide ! 🌟 Besoin d'autre chose ?",
+    "Avec plaisir. N'hésitez pas si vous avez d'autres questions sur M2HC.",
+    "De rien. Je suis là pour vous aider.",
+    "Ravi d'avoir pu vous aider. À votre service.",
+    "Content que ça vous aide. Besoin d'autre chose?",
   ],
 };
 
@@ -283,7 +406,7 @@ export async function generateChatResponse(
     let score = 0;
     for (const keyword of data.keywords) {
       if (userMessage.includes(keyword)) {
-        score += keyword.length; // Les mots plus longs ont plus de poids
+        score += keyword.length;
       }
     }
     
@@ -305,17 +428,20 @@ export async function generateChatResponse(
 
   // Réponse par défaut si aucune correspondance
   return {
-    message: `Désolé, je n'ai pas bien compris votre question. 🤔
+    message: `Désolé, je n'ai pas bien compris votre question.
 
-Voici ce que je peux vous expliquer:
-- ℹ️ Informations sur M2H2
-- 💰 Comment faire un don
-- 🙋 Devenir bénévole
-- 🎓 Programmes pour jeunes
-- 👴 Programmes pour seniors
-- 📞 Nous contacter
+Voici ce que je peux vous expliquer sur M2HC:
+- Informations sur M2HC
+- Comment faire un don
+- Programmes de santé holistique
+- Programmes pour femmes
+- Programmes famille et enfants
+- Programmes jeunesse
+- Galerie et événements
+- Témoignages
+- Nous contacter
 
-Ou contactez-nous directement à **contact@m2h2.org** ! 📧`,
+Ou contactez-nous directement: mholistichealthcenter@gmail.com`,
     sessionId,
     confidence: 0,
   };
@@ -325,6 +451,5 @@ Ou contactez-nous directement à **contact@m2h2.org** ! 📧`,
  * Détection rapide de FAQ (pour compatibilité)
  */
 export function detectFAQ(question: string): string | null {
-  // La logique est maintenant intégrée dans generateChatResponse
   return null;
 }

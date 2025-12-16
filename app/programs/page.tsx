@@ -82,19 +82,24 @@ const actions = [
     icon: BrainCircuit,
   },
   {
-    title: "Sensibilisation",
-    description: "Causeries éducatives lors de journées internationales et nationales",
+    title: "Sensibilisation & Journées",
+    description: "Causeries éducatives : Fête de la Jeunesse, Journée de la Femme, Journée de l'Enfant Africain, 16 jours d'activisme, Journée du Handicap, Droits de l'Homme, Famille, Femme Africaine",
     icon: Users,
   },
   {
-    title: "Campagnes de Santé",
-    description: "Interventions holistiques en zones rurales (Mengueme, Mbeng, Makak, Obala, etc.)",
+    title: "Campagnes en Zones Rurales",
+    description: "Interventions holistiques à Mengueme, Mbeng, Makak, Obala, Meyomesala, Ngoantet et Foumban",
     icon: Stethoscope,
   },
   {
     title: "Activités Communautaires",
-    description: "Événements, remise de dons et soutien aux personnes déplacées",
+    description: "Événements, remise de dons et prise en charge des personnes déplacées internes du NOSO",
     icon: Heart,
+  },
+  {
+    title: "Réarmement Moral",
+    description: "Formation du personnel de santé (Hôpital Général, Hôpital Central, EPC Djoungolo, Hôpital Militaire)",
+    icon: Activity,
   },
 ]
 

@@ -58,7 +58,10 @@ export default function ContactPage() {
       const data = await response.json()
 
       if (response.ok) {
-        toast.success(data.message)
+        toast.success(
+          "Message envoyé avec succès! Nous vous répondrons sous 24-48h à votre adresse email.",
+          { duration: 6000, position: 'top-center' }
+        )
         setFormData({
           name: "",
           email: "",
@@ -67,7 +70,7 @@ export default function ContactPage() {
           message: "",
         })
       } else {
-        toast.error(data.error || "Une erreur est survenue")
+        toast.error(data.error || "Une erreur est survenue", { duration: 4000 })
       }
     } catch (error) {
       toast.error("Une erreur est survenue")
@@ -256,9 +259,11 @@ export default function ContactPage() {
                 <p className="text-sm text-gray-600 mb-4">
                   Consultez notre FAQ pour trouver rapidement des réponses aux questions les plus courantes.
                 </p>
-                <Button variant="outline" fullWidth>
-                  Voir la FAQ
-                </Button>
+                <a href="/faq">
+                  <Button variant="outline" fullWidth>
+                    Voir la FAQ
+                  </Button>
+                </a>
             </div>
           </motion.div>
         </div>
@@ -280,7 +285,7 @@ export default function ContactPage() {
                       Appelez-nous
                     </Button>
                   </a>
-                  <a href="mailto:contact@m2h2.org">
+                  <a href="mailto:mholistichealthcenter@gmail.com">
                     <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                       <Mail className="h-5 w-5 mr-2" />
                       Envoyez un email

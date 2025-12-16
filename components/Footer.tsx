@@ -11,6 +11,7 @@ import { brandColors } from "@/lib/theme"
 export default function Footer() {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   // Couleurs pour les hovers
   const primaryColor = brandColors.primary[600];
@@ -19,6 +20,7 @@ export default function Footer() {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setSuccess(false)
 
     try {
       const response = await fetch("/api/newsletter", {
@@ -30,13 +32,26 @@ export default function Footer() {
       const data = await response.json()
 
       if (response.ok) {
-        toast.success(data.message)
+        toast.success(data.message || "✅ Inscription réussie à la newsletter!", {
+          duration: 4000,
+          position: 'bottom-center',
+        })
         setEmail("")
+        setSuccess(true)
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => setSuccess(false), 5000)
       } else {
-        toast.error(data.error || "Une erreur est survenue")
+        toast.error(data.error || "Une erreur est survenue", {
+          duration: 4000,
+          position: 'bottom-center',
+        })
       }
     } catch (error) {
-      toast.error("Une erreur est survenue")
+      toast.error("Erreur de connexion. Veuillez réessayer.", {
+        duration: 4000,
+        position: 'bottom-center',
+      })
     } finally {
       setLoading(false)
     }
@@ -52,7 +67,7 @@ export default function Footer() {
               <img 
                 src="/logo.jpeg" 
                 alt="M2HC Logo" 
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain rounded"
               />
               <h2 className="text-xl font-bold">M2HC</h2>
             </div>
@@ -155,31 +170,39 @@ export default function Footer() {
             <p className="text-gray-400 text-sm mb-4">
               Restez informé de nos actualités et événements
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-              <Input
-                type="email"
-                placeholder="Votre email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                disabled={loading}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                {loading ? (
-                  "Envoi..."
-                ) : (
-                  <>
-                    <Send className="h-4 w-4 mr-2" />
-                    S&apos;inscrire
-                  </>
-                )}
-              </Button>
-            </form>
+            {success ? (
+              <div className="bg-green-600 text-white p-4 rounded-lg text-center animate-pulse">
+                <Heart className="h-6 w-6 mx-auto mb-2" />
+                <p className="font-semibold">Merci de votre inscription!</p>
+                <p className="text-sm mt-1">Vous recevrez nos actualités bientôt</p>
+              </div>
+            ) : (
+              <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+                <Input
+                  type="email"
+                  placeholder="Votre email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  disabled={loading}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {loading ? (
+                    "Envoi..."
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      S&apos;inscrire
+                    </>
+                  )}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
 

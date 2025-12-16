@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Heart, Users, Phone, LogIn } from "lucide-react"
+import { Menu, X, Heart } from "lucide-react"
 import { Button } from "./ui/button"
 import { brandColors } from "@/lib/theme"
 
@@ -81,12 +81,6 @@ export default function Header() {
                 Faire un don
               </Button>
             </Link>
-            <Link href="/auth/login">
-              <Button size="sm" className="text-sm">
-                <LogIn className="h-4 w-4 mr-1.5" />
-                Connexion
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -126,12 +120,6 @@ export default function Header() {
                 <Button variant="outline" fullWidth>
                   <Heart className="h-4 w-4 mr-2" />
                   Faire un don
-                </Button>
-              </Link>
-              <Link href="/auth/login" className="block">
-                <Button fullWidth>
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Connexion
                 </Button>
               </Link>
             </div>

@@ -59,8 +59,6 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    await dbConnect()
-    
     const { searchParams } = new URL(req.url)
     const email = searchParams.get("email")
 
@@ -71,8 +69,8 @@ export async function DELETE(req: Request) {
       )
     }
 
-    const newsletter = await Newsletter.findOne({ email })
-    if (newsletter) {
+    const newsletter = await NewsletterModel.findOne({ email })
+    if (newsletter && newsletter.save) {
       newsletter.active = false
       await newsletter.save()
     }
@@ -83,6 +81,28 @@ export async function DELETE(req: Request) {
     )
   } catch (error) {
     console.error("Newsletter unsubscribe error:", error)
+    return NextResponse.json(
+      { error: "Une erreur est survenue" },
+      { status: 500 }
+    )
+  }
+}
+
+export async function GET(req: Request) {
+  try {
+    const subscribers = await NewsletterModel.findAll()
+    const count = await NewsletterModel.countActive()
+    
+    return NextResponse.json(
+      { 
+        subscribers, 
+        count,
+        message: "Liste des abonnés récupérée avec succès" 
+      },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error("Newsletter GET error:", error)
     return NextResponse.json(
       { error: "Une erreur est survenue" },
       { status: 500 }

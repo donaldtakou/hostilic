@@ -34,8 +34,9 @@ interface ContactMessage {
 interface Newsletter {
   _id: string;
   email: string;
-  status: string;
+  active: boolean;
   createdAt: Date;
+  save?: () => Promise<Newsletter>;
 }
 
 interface Feedback {
@@ -84,6 +85,69 @@ const adminUser: User = {
 // Initialiser avec l'admin
 if (db.users.length === 0) {
   db.users.push(adminUser);
+}
+
+// Témoignages par défaut approuvés
+const defaultFeedbacks: Feedback[] = [
+  {
+    _id: 'feedback-001',
+    name: 'Marie Dupont',
+    email: 'marie@example.com',
+    rating: 5,
+    message: "L'accompagnement holistique de M2HC m'a permis de retrouver un équilibre de vie. L'équipe est à l'écoute et professionnelle. Je recommande vivement leurs services.",
+    approved: true,
+    createdAt: new Date('2024-11-15'),
+  },
+  {
+    _id: 'feedback-002',
+    name: 'Jean Kouam',
+    email: 'jean@example.com',
+    rating: 5,
+    message: "Grâce aux ateliers de M2HC, j'ai pu développer mes compétences et ma confiance en moi. Un grand merci à toute l'équipe pour leur dévouement.",
+    approved: true,
+    createdAt: new Date('2024-11-20'),
+  },
+  {
+    _id: 'feedback-003',
+    name: 'Aïssatou Sow',
+    email: 'aissatou@example.com',
+    rating: 5,
+    message: "Les campagnes de santé holistique ont changé ma vie. J'ai appris à prendre soin de ma santé mentale et physique. Merci M2HC !",
+    approved: true,
+    createdAt: new Date('2024-12-01'),
+  },
+  {
+    _id: 'feedback-004',
+    name: 'Paul Nkeng',
+    email: 'paul@example.com',
+    rating: 4,
+    message: "Excellent accompagnement, équipe professionnelle et bienveillante. Les formations sont de grande qualité et très enrichissantes.",
+    approved: true,
+    createdAt: new Date('2024-12-05'),
+  },
+  {
+    _id: 'feedback-005',
+    name: 'Sophie Mbarga',
+    email: 'sophie@example.com',
+    rating: 5,
+    message: "M2HC m'a aidée à traverser une période difficile. Leur approche holistique prend vraiment en compte tous les aspects de notre bien-être.",
+    approved: true,
+    createdAt: new Date('2024-12-08'),
+  },
+  {
+    _id: 'feedback-006',
+    name: 'David Essomba',
+    email: 'david@example.com',
+    rating: 5,
+    message: "Les programmes jeunesse de M2HC sont exceptionnels. Ils ont permis à mes enfants de s'épanouir et de développer leur potentiel.",
+    approved: true,
+    createdAt: new Date('2024-12-10'),
+  },
+];
+
+// Initialiser avec les feedbacks par défaut
+if (db.feedbacks.length === 0) {
+  db.feedbacks.push(...defaultFeedbacks);
 }
 
 // API pour les Users
@@ -161,18 +225,38 @@ export const NewsletterModel = {
     const newSubscriber: Newsletter = {
       ...data,
       _id: generateId(),
-      status: 'active',
+      active: true,
       createdAt: new Date(),
+      save: async function() {
+        const index = db.newsletters.findIndex(n => n._id === this._id);
+        if (index !== -1) {
+          db.newsletters[index] = this;
+        }
+        return this;
+      }
     };
     db.newsletters.push(newSubscriber);
     return newSubscriber;
   },
   
   findOne: async (query: { email: string }) => {
-    return db.newsletters.find(n => n.email === query.email) || null;
+    const subscriber = db.newsletters.find(n => n.email === query.email);
+    if (subscriber) {
+      // Ajouter la méthode save
+      subscriber.save = async function() {
+        const index = db.newsletters.findIndex(n => n._id === this._id);
+        if (index !== -1) {
+          db.newsletters[index] = this;
+        }
+        return this;
+      };
+    }
+    return subscriber || null;
   },
   
-  findAll: async () => db.newsletters,
+  findAll: async () => db.newsletters.filter(n => n.active),
+  
+  countActive: async () => db.newsletters.filter(n => n.active).length,
 };
 
 // API pour les Feedbacks
@@ -200,6 +284,16 @@ export const FeedbackModel = {
     if (index !== -1) {
       db.feedbacks[index] = { ...db.feedbacks[index], ...update };
       return db.feedbacks[index];
+    }
+    return null;
+  },
+  
+  deleteOne: async (query: { _id: string }) => {
+    const index = db.feedbacks.findIndex(f => f._id === query._id);
+    if (index !== -1) {
+      const deleted = db.feedbacks[index];
+      db.feedbacks.splice(index, 1);
+      return deleted;
     }
     return null;
   },

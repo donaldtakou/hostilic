@@ -2,15 +2,19 @@
 
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Star, Quote, Filter } from "lucide-react"
+import { Star, Quote, Filter, Upload, X, Image as ImageIcon, CheckCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import toast from "react-hot-toast"
 
 interface Testimonial {
   id: string
   name: string
   rating: number
   message: string
+  photo?: string
   createdAt: string
 }
 
@@ -25,6 +29,11 @@ export default function TestimonialsPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [filter, setFilter] = useState("all")
   const [loading, setLoading] = useState(true)
+  const [showForm, setShowForm] = useState(false)
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", rating: 5 })
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     fetchTestimonials()
@@ -39,6 +48,58 @@ export default function TestimonialsPage() {
       console.error("Error fetching testimonials:", error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setPhotoFile(file)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          rating: formData.rating,
+          photo: photoPreview,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        toast.success(
+          "✅ Merci pour votre témoignage ! Il sera examiné et publié prochainement.",
+          { duration: 5000, position: 'top-center' }
+        )
+        setFormData({ name: "", email: "", message: "", rating: 5 })
+        setPhotoFile(null)
+        setPhotoPreview(null)
+        setShowForm(false)
+        // Pas besoin de recharger car le témoignage doit être approuvé d'abord
+      } else {
+        toast.error(data.error || "Une erreur est survenue", { duration: 4000 })
+      }
+    } catch (error) {
+      console.error("Error submitting testimonial:", error)
+      toast.error("Erreur de connexion. Veuillez réessayer.", { duration: 4000 })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -174,17 +235,175 @@ export default function TestimonialsPage() {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="mt-12 md:mt-16 lg:mt-20 text-center rounded-2xl p-6 md:p-10 lg:p-12" style={{ background: 'linear-gradient(to right, #0D47A1, #8B6F47)' }}>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 md:mb-4 px-4">
-            Partagez votre expérience
-          </h2>
-          <p className="text-white/90 text-base sm:text-lg mb-4 md:mb-6 max-w-2xl mx-auto px-4">
-            Votre témoignage peut inspirer et aider d'autres personnes dans leur parcours de guérison
-          </p>
-          <Button size="lg" className="bg-white hover:bg-gray-100 text-sm md:text-base" style={{ color: '#0D47A1' }}>
-            Laisser un témoignage
-          </Button>
+        {/* Testimonial Form Section */}
+        <div className="mt-12 md:mt-16 lg:mt-20">
+          {!showForm ? (
+            <div className="text-center rounded-2xl p-6 md:p-10 lg:p-12" style={{ background: 'linear-gradient(to right, #0D47A1, #8B6F47)' }}>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 md:mb-4 px-4">
+                Partagez votre expérience
+              </h2>
+              <p className="text-white/90 text-base sm:text-lg mb-4 md:mb-6 max-w-2xl mx-auto px-4">
+                Votre témoignage peut inspirer et aider d'autres personnes dans leur parcours de guérison
+              </p>
+              <Button 
+                size="lg" 
+                onClick={() => setShowForm(true)}
+                className="bg-white hover:bg-gray-100 text-sm md:text-base" 
+                style={{ color: '#0D47A1' }}
+              >
+                Laisser un témoignage
+              </Button>
+            </div>
+          ) : (
+            <Card className="max-w-3xl mx-auto">
+              <CardContent className="pt-6 px-4 md:px-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold" style={{ color: '#0D47A1' }}>
+                    Nouveau témoignage
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setShowForm(false)
+                      setFormData({ name: "", email: "", message: "", rating: 5 })
+                      setPhotoFile(null)
+                      setPhotoPreview(null)
+                    }}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Votre nom *
+                    </label>
+                    <Input
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Entrez votre nom"
+                      className="w-full"
+                    />
+                  </div>
+
+                  {/* Email Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Votre email *
+                    </label>
+                    <Input
+                      required
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="votre.email@example.com"
+                      className="w-full"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Votre email ne sera pas publié
+                    </p>
+                  </div>
+
+                  {/* Rating */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Votre évaluation *
+                    </label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, rating: star })}
+                          className="focus:outline-none"
+                        >
+                          <Star
+                            className={`h-8 w-8 transition-colors ${
+                              star <= formData.rating
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Votre témoignage *
+                    </label>
+                    <Textarea
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Partagez votre expérience avec M2HC..."
+                      rows={6}
+                      className="w-full"
+                    />
+                  </div>
+
+                  {/* Photo Upload */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ajouter une photo (optionnel)
+                    </label>
+                    <div className="mt-2">
+                      {photoPreview ? (
+                        <div className="relative inline-block">
+                          <img
+                            src={photoPreview}
+                            alt="Preview"
+                            className="h-32 w-32 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPhotoFile(null)
+                              setPhotoPreview(null)
+                            }}
+                            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <Upload className="w-8 h-8 mb-2 text-gray-400" />
+                            <p className="text-sm text-gray-500">
+                              Cliquez pour télécharger une photo
+                            </p>
+                          </div>
+                          <input
+                            type="file"
+                            className="hidden"
+                            accept="image/*"
+                            onChange={handlePhotoChange}
+                          />
+                        </label>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full"
+                    style={{ backgroundColor: '#0D47A1' }}
+                  >
+                    {submitting ? "Envoi en cours..." : "Envoyer mon témoignage"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>

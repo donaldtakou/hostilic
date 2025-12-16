@@ -4,6 +4,58 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Heart, Users, Award, TrendingUp, ArrowRight, Target, Eye, Shield, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import ImageCarousel from "@/components/ImageCarousel"
+
+const heroCarousel = [
+  {
+    id: "1",
+    image: "/gallery/JOURNEE INTERNATIONALE DE LA FEMME/1.jpg",
+    title: "Journée Internationale de la Femme",
+    description: "Autonomisation et célébration des femmes",
+  },
+  {
+    id: "2",
+    image: "/gallery/JOURNÉE INTERNATIONALE DES PERSONNES EN SITUATION DE HANDICAP/3.jpg",
+    title: "Inclusion et Dignité pour Tous",
+    description: "Accompagnement des personnes en situation de handicap",
+  },
+  {
+    id: "3",
+    image: "/gallery/M2HC A LETRANGER/1.jpg",
+    title: "M2HC à l'International",
+    description: "Notre impact au-delà des frontières",
+  },
+  {
+    id: "4",
+    image: "/gallery/CAMPAGNE DE SANTE HOLISTIQUE/5.jpg",
+    title: "Santé Holistique",
+    description: "Interventions en zones rurales et urbaines",
+  },
+  {
+    id: "5",
+    image: "/gallery/16 JOURS DACTIVISME CONTRE LES VIOLENCES BASEES SUR LE GENRE/2.jpg",
+    title: "Lutte contre les Violences",
+    description: "16 jours d'activisme contre les violences basées sur le genre",
+  },
+  {
+    id: "6",
+    image: "/gallery/M2HC ET LES INSTITUTIONS/2.jpg",
+    title: "Partenariats Institutionnels",
+    description: "Collaboration pour le bien-être professionnel",
+  },
+  {
+    id: "7",
+    image: "/gallery/JOURNEE DE LA FEMME AFRICAINE/1.jpg",
+    title: "Femme Africaine",
+    description: "Honorer les femmes africaines et leurs contributions",
+  },
+  {
+    id: "8",
+    image: "/gallery/jeunesse/1.jpg",
+    title: "Programmes Jeunesse",
+    description: "Accompagnement et formation des jeunes",
+  },
+]
 
 const stats = [
   { id: 1, name: "Partenaires actifs", value: "10+", icon: Users },
@@ -48,6 +100,16 @@ const values = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Hero Carousel Section */}
+      <section className="relative">
+        <ImageCarousel 
+          items={heroCarousel} 
+          autoplay={true}
+          effect="fade"
+          className="h-[500px] md:h-[600px] lg:h-[700px]"
+        />
+      </section>
+
       {/* Hero Section */}
       <section className="relative bg-[#0D47A1] text-white py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -71,7 +133,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Link href="/donate" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto bg-white text-[#0D47A1] hover:bg-gray-100 text-base md:text-lg px-6 md:px-8">
+                <Button size="lg" className="w-full sm:w-auto bg-[#8B6F47] text-white hover:bg-[#6d5638] text-base md:text-lg px-6 md:px-8">
                   <Heart className="mr-2 h-5 w-5" />
                   Faire un don
                 </Button>
@@ -174,7 +236,7 @@ export default function HomePage() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-white border-2 border-gray-100 rounded-xl p-6 md:p-8 hover:border-[#0D47A1] hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-[#8B6F47] rounded-xl mb-4 md:mb-6">
+                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#8B6F47] to-[#6B5437] rounded-xl mb-4 md:mb-6">
                     <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
                   </div>
                   <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
@@ -207,8 +269,8 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Link href="/donate" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto bg-white text-[#0D47A1] hover:bg-gray-100">
-                  <Heart className="mr-2 h-5 w-5" />
+                <Button size="lg" className="w-full sm:w-auto bg-[#8B6F47] text-white hover:bg-[#6d5638]">
+                  <Heart className="mr-2 h-5 w-5 " />
                   Faire un don
                 </Button>
               </Link>
