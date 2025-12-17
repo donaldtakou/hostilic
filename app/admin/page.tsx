@@ -20,6 +20,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { brandColors } from "@/lib/theme"
 
+export const dynamic = 'force-dynamic'
+
 interface Stats {
   totalUsers: number
   totalDonations: number

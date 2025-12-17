@@ -7,8 +7,11 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import toast from "react-hot-toast"
 import { brandColors } from "@/lib/theme"
+import { useTranslations, useLocale } from 'next-intl'
 
 export default function Footer() {
+  const t = useTranslations('footer');
+  const locale = useLocale();
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -72,7 +75,7 @@ export default function Footer() {
               <h2 className="text-xl font-bold">M2HC</h2>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Marguerita Holistic Health Center - Accompagnement et prise en charge holistique pour votre bien-être global et le développement du capital humain.
+              {t('description')}
             </p>
             <div className="flex space-x-3">
               <a 
@@ -112,31 +115,31 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Liens rapides</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  À propos de nous
+                <Link href={`/${locale}/about`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                  {t('aboutUs')}
                 </Link>
               </li>
               <li>
-                <Link href="/programs" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Nos programmes
+                <Link href={`/${locale}/programs`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                  {t('ourPrograms')}
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Blog & Actualités
+                <Link href={`/${locale}/blog`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                  {t('blogNews')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Nous contacter
+                <Link href={`/${locale}/contact`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                  {t('contactUs')}
                 </Link>
               </li>
               <li>
-                <Link href="/donate" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Faire un don
+                <Link href={`/${locale}/donate`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                  {t('donate')}
                 </Link>
               </li>
             </ul>
@@ -144,7 +147,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('contact')}</h3>
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 flex-shrink-0" style={{ color: primaryColor }} />
@@ -157,7 +160,7 @@ export default function Footer() {
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />
                 <div className="text-gray-400 text-sm">
-                  <div>Compte Bancaire:</div>
+                  <div>{t('bankAccount')}</div>
                   <div className="font-medium">679 012 650 01</div>
                 </div>
               </li>
@@ -166,21 +169,21 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('newsletter')}</h3>
             <p className="text-gray-400 text-sm mb-4">
-              Restez informé de nos actualités et événements
+              {t('newsletterDesc')}
             </p>
             {success ? (
               <div className="bg-green-600 text-white p-4 rounded-lg text-center animate-pulse">
                 <Heart className="h-6 w-6 mx-auto mb-2" />
-                <p className="font-semibold">Merci de votre inscription!</p>
-                <p className="text-sm mt-1">Vous recevrez nos actualités bientôt</p>
+                <p className="font-semibold">{t('thankYou')}</p>
+                <p className="text-sm mt-1">{t('receiveNews')}</p>
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
                 <Input
                   type="email"
-                  placeholder="Votre email"
+                  placeholder={t('emailPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -193,11 +196,11 @@ export default function Footer() {
                   className="bg-blue-600 hover:bg-blue-700"
                 >
                   {loading ? (
-                    "Envoi..."
+                    t('sending')
                   ) : (
                     <>
                       <Send className="h-4 w-4 mr-2" />
-                      S&apos;inscrire
+                      {t('subscribe')}
                     </>
                   )}
                 </Button>
@@ -210,14 +213,14 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} M2H2. Tous droits réservés.
+              © {new Date().getFullYear()} M2HC. {t('rights')}.
             </p>
             <div className="flex space-x-6">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
-                Politique de confidentialité
+              <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                {t('privacy')}
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
-                Conditions d&apos;utilisation
+              <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white transition-colors text-sm">
+                {t('terms')}
               </Link>
             </div>
           </div>

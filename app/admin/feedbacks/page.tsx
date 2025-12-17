@@ -20,24 +20,27 @@ interface Feedback {
   createdAt: string
 }
 
+// Désactiver le prerendering statique pour les pages admin
+export const dynamic = 'force-dynamic'
+
 export default function AdminFeedbacksPage() {
-  const { data: session, status } = useSession()
+  const session = useSession()
   const router = useRouter()
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState("all")
 
   useEffect(() => {
-    if (status === "unauthenticated") {
+    if (session.status === "unauthenticated") {
       router.push("/auth/login")
-    } else if (status === "authenticated") {
-      if ((session?.user as any)?.role !== "ADMIN") {
+    } else if (session.status === "authenticated") {
+      if ((session.data?.user as any)?.role !== "ADMIN") {
         router.push("/")
       } else {
         fetchFeedbacks()
       }
     }
-  }, [status, session, router])
+  }, [session.status, session.data, router])
 
   const fetchFeedbacks = async () => {
     try {
@@ -113,7 +116,7 @@ export default function AdminFeedbacksPage() {
     return true
   })
 
-  if (loading || status === "loading") {
+  if (loading || session.status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>

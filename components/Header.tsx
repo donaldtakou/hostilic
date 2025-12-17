@@ -2,25 +2,36 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Heart } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
+import { Menu, X, Heart, Globe } from "lucide-react"
 import { Button } from "./ui/button"
 import { brandColors } from "@/lib/theme"
-
-const navigation = [
-  { name: "Accueil", href: "/" },
-  { name: "À propos", href: "/about" },
-  { name: "Programmes", href: "/programs" },
-  { name: "Galerie", href: "/gallery" },
-  { name: "Témoignages", href: "/testimonials" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-]
+import { useLocale, useTranslations } from 'next-intl'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
+  const locale = useLocale()
+  const t = useTranslations('nav')
+
+  const navigation = [
+    { name: t('home'), href: `/${locale}` },
+    { name: t('about'), href: `/${locale}/about` },
+    { name: t('programs'), href: `/${locale}/programs` },
+    { name: t('gallery'), href: `/${locale}/gallery` },
+    { name: t('testimonials'), href: `/${locale}/testimonials` },
+    { name: t('blog'), href: `/${locale}/blog` },
+    { name: t('contact'), href: `/${locale}/contact` },
+  ]
+
+  const changeLanguage = (newLocale: string) => {
+    // Obtenir le chemin sans la locale
+    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/'
+    // Rediriger vers la nouvelle locale
+    router.push(`/${newLocale}${pathWithoutLocale}`)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,10 +86,37 @@ export default function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Link href="/donate">
+            {/* Language Selector */}
+            <div className="flex items-center gap-1 border-2 rounded-lg p-1 shadow-sm" style={{ borderColor: brandColors.primary[200] }}>
+              <Globe className="h-4 w-4 text-gray-500 ml-1" />
+              <button
+                onClick={() => changeLanguage('fr')}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 ${
+                  locale === 'fr' 
+                    ? 'bg-opacity-100 text-white shadow-sm scale-105' 
+                    : 'text-gray-600 hover:bg-gray-100 hover:scale-105'
+                }`}
+                style={locale === 'fr' ? { backgroundColor: brandColors.primary[600] } : {}}
+              >
+                FR
+              </button>
+              <button
+                onClick={() => changeLanguage('en')}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 ${
+                  locale === 'en' 
+                    ? 'bg-opacity-100 text-white shadow-sm scale-105' 
+                    : 'text-gray-600 hover:bg-gray-100 hover:scale-105'
+                }`}
+                style={locale === 'en' ? { backgroundColor: brandColors.primary[600] } : {}}
+              >
+                EN
+              </button>
+            </div>
+            
+            <Link href={`/${locale}/donate`}>
               <Button variant="outline" size="sm" className="text-sm">
                 <Heart className="h-4 w-4 mr-1.5" />
-                Faire un don
+                {t('donate')}
               </Button>
             </Link>
           </div>
@@ -116,10 +154,42 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4 space-y-2">
-              <Link href="/donate" className="block">
+              {/* Language Selector Mobile */}
+              <div className="px-4">
+                <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 font-medium">
+                  <Globe className="h-4 w-4" />
+                  <span>Language / Langue</span>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => { changeLanguage('fr'); setMobileMenuOpen(false); }}
+                    className={`flex-1 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                      locale === 'fr' 
+                        ? 'bg-opacity-100 text-white shadow-lg scale-105 ring-2 ring-offset-2' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95'
+                    }`}
+                    style={locale === 'fr' ? { backgroundColor: brandColors.primary[600], ringColor: brandColors.primary[300] } : {}}
+                  >
+                    🇫🇷 Français
+                  </button>
+                  <button
+                    onClick={() => { changeLanguage('en'); setMobileMenuOpen(false); }}
+                    className={`flex-1 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                      locale === 'en' 
+                        ? 'bg-opacity-100 text-white shadow-lg scale-105 ring-2 ring-offset-2' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95'
+                    }`}
+                    style={locale === 'en' ? { backgroundColor: brandColors.primary[600], ringColor: brandColors.primary[300] } : {}}
+                  >
+                    🇬🇧 English
+                  </button>
+                </div>
+              </div>
+              
+              <Link href={`/${locale}/donate`} className="block">
                 <Button variant="outline" fullWidth>
                   <Heart className="h-4 w-4 mr-2" />
-                  Faire un don
+                  {t('donate')}
                 </Button>
               </Link>
             </div>

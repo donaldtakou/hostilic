@@ -1,0 +1,442 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Programmes",
+    "gallery": "Galerie",
+    "testimonials": "Témoignages",
+    "blog": "Blog",
+    "contact": "Contact",
+    "donate": "Faire un don"
+  },
+  "common": {
+    "welcome": "Bienvenue",
+    "readMore": "Lire plus",
+    "learnMore": "En savoir plus",
+    "submit": "Soumettre",
+    "send": "Envoyer",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "thankYou": "Merci pour votre générosité ! 💙"
+  },
+  "donate": {
+    "title": "Faire un Don",
+    "subtitle": "Votre générosité change des vies. Soutenez nos programmes pour les jeunes et les personnes âgées.",
+    "choosePayment": "Choisissez votre moyen de paiement",
+    "mtn": "MTN Mobile Money",
+    "orange": "Orange Money",
+    "card": "Virement Bancaire",
+    "cardPayment": "Carte Bancaire",
+    "number": "Numéro",
+    "accountNumber": "Numéro de compte",
+    "copied": "Numéro copié !",
+    "instructions": "Instructions :",
+    "mtnInstructions": "Composez *126# puis suivez les instructions pour envoyer votre don",
+    "orangeInstructions": "Composez #150# puis suivez les instructions pour envoyer votre don",
+    "cardInstructions": "Effectuez un virement bancaire vers ce compte",
+    "suggestedAmounts": "Montants suggérés",
+    "customAmount": "Ces montants sont indicatifs. Vous pouvez donner le montant de votre choix.",
+    "impact": "Impact du don",
+    "impact5k": "Repas pour 5 personnes âgées",
+    "impact25k": "Kit scolaire pour 10 jeunes",
+    "impact100k": "Formation professionnelle complète",
+    "selectCurrency": "Sélectionnez votre devise",
+    "currency": "Devise",
+    "amount": "Montant"
+  },
+  "chatbot": {
+    "title": "Assistant M2HC",
+    "subtitle": "Assistant Intelligent",
+    "welcome": "Bonjour ! 👋 Je suis l'assistant virtuel de M2HC. Comment puis-je vous aider aujourd'hui ?",
+    "placeholder": "Posez votre question...",
+    "newConversation": "Nouvelle conversation",
+    "conversationReset": "Conversation réinitialisée. Comment puis-je vous aider ?",
+    "connectionError": "Erreur de connexion",
+    "errorMessage": "Désolé, une erreur s'est produite. Veuillez réessayer ou contactez-nous à contact@m2h2.org"
+  },
+  "footer": {
+    "description": "Marguerita Holistic Health Center - Accompagnement et prise en charge holistique pour votre bien-être global et le développement du capital humain.",
+    "quickLinks": "Liens rapides",
+    "aboutUs": "À propos de nous",
+    "ourPrograms": "Nos programmes",
+    "blogNews": "Blog & Actualités",
+    "contactUs": "Nous contacter",
+    "donate": "Faire un don",
+    "contact": "Contact",
+    "bankAccount": "Compte Bancaire:",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Restez informé de nos actualités et événements",
+    "emailPlaceholder": "Votre email",
+    "subscribe": "S'inscrire",
+    "sending": "Envoi...",
+    "thankYou": "Merci de votre inscription!",
+    "receiveNews": "Vous recevrez nos actualités bientôt",
+    "rights": "Tous droits réservés",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "followUs": "Suivez-nous"
+  },
+  "home": {
+    "hero": {
+      "title": "Marguerita Holistic Health Center",
+      "subtitle": "Prémunir et contribuer à libérer l'être humain de l'état de vulnérabilité ou de mal-être grâce à l'approche holistique",
+      "description": "Pour une santé globale, le développement du capital humain et le bien-être intégral",
+      "programsBtn": "Nos programmes"
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Contribuer à l'amélioration du bien-être des individus victimes d'affections diverses, en assurant l'accompagnement et la prise en charge holistique par le biais d'appuis intégrés (éducatif, sanitaire, psychosocial, sportif, ludique, spirituel…). M2HC œuvre à la promotion du développement du capital humain, le renforcement des capacités et le vivre-ensemble."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Prémunir et contribuer à libérer l'être humain de l'état de vulnérabilité grâce à l'approche holistique (mentale, émotionnelle, sociale, spirituelle, psychologique et physique), pour restaurer les équilibres fondamentaux et vivre en harmonie."
+    },
+    "stats": {
+      "partners": "Partenaires actifs",
+      "people": "Personnes accompagnées",
+      "axes": "Axes stratégiques",
+      "zones": "Zones d'intervention"
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "subtitle": "Les principes qui guident nos actions au quotidien",
+      "dignity": "Dignité humaine",
+      "dignityDesc": "Nous plaçons la valeur de chaque personne au centre de notre accompagnement.",
+      "holistic": "Approche holistique",
+      "holisticDesc": "Nous considérons l'être humain dans toutes ses dimensions : physique, mentale, émotionnelle et sociale.",
+      "empowerment": "Autonomisation",
+      "empowermentDesc": "Nous aidons chacun, en particulier les femmes et les jeunes, à devenir acteur principal de son bien-être.",
+      "empathy": "Empathie et écoute",
+      "empathyDesc": "Nous offrons un accompagnement bienveillant, confidentiel et respectueux.",
+      "equity": "Équité et inclusion",
+      "equityDesc": "Nous œuvrons pour un accès juste et accessible au bien-être pour tous.",
+      "integrity": "Intégrité et professionnalisme",
+      "integrityDesc": "Nous travaillons avec éthique, rigueur et transparence."
+    },
+    "cta": {
+      "title": "Rejoignez notre mission",
+      "subtitle": "Ensemble, œuvrons pour un bien-être holistique et une société plus solidaire",
+      "contactBtn": "Nous contacter"
+    }
+  },
+  "gallery": {
+    "title": "Galerie M2HC",
+    "subtitle": "Découvrez en images nos actions de santé holistique et nos interventions sur le terrain",
+    "backToCollections": "Retour aux collections",
+    "viewPhotos": "Voir les photos",
+    "photo": "photo",
+    "photos": "photos",
+    "noCollections": "Aucune collection trouvée pour cette catégorie.",
+    "categories": {
+      "all": "Tous",
+      "evenements": "Événements & Journées",
+      "sante": "Campagnes de Santé",
+      "communautaire": "Actions Communautaires",
+      "institutions": "Institutions",
+      "jeunesse": "Jeunesse",
+      "international": "International"
+    },
+    "folders": {
+      "womenDay": "Journée Internationale de la Femme",
+      "womenDayDesc": "Célébration et autonomisation des femmes",
+      "africanWomen": "Journée de la Femme Africaine",
+      "africanWomenDesc": "Honorer les femmes africaines et leurs contributions",
+      "africanChild": "Journée de l'Enfant Africain",
+      "africanChildDesc": "Pour le bien-être et les droits des enfants",
+      "youthDay": "Journée Internationale de la Jeunesse",
+      "youthDayDesc": "Engagement et autonomisation de la jeunesse",
+      "familyDay": "Journée Internationale de la Famille",
+      "familyDayDesc": "Célébration des liens familiaux",
+      "humanRights": "Journée des Droits de l'Homme",
+      "humanRightsDesc": "Promotion et protection des droits humains",
+      "disability": "Journée des Personnes en Situation de Handicap",
+      "disabilityDesc": "Inclusion et dignité pour tous",
+      "activism16": "16 Jours d'Activisme contre les Violences",
+      "activism16Desc": "Lutte contre les violences basées sur le genre",
+      "healthCampaign": "Campagnes de Santé Holistique",
+      "healthCampaignDesc": "Interventions en zones rurales et urbaines",
+      "international": "M2HC à l'International",
+      "internationalDesc": "Notre impact au-delà des frontières",
+      "institutions": "M2HC et les Institutions",
+      "institutionsDesc": "Partenariats institutionnels",
+      "noso": "Personnes Déplacées Internes du NOSO (Nord-Ouest et Sud-Ouest)",
+      "nosoDesc": "Accompagnement holistique des PDI",
+      "covid": "Réarmement Moral pendant le COVID",
+      "covidDesc": "Soutien au personnel de santé",
+      "youthPrograms": "Programmes Jeunesse",
+      "youthProgramsDesc": "Accompagnement et formation des jeunes",
+      "schoolDonations": "Remise de Dons Scolaires",
+      "schoolDonationsDesc": "Soutien à l'éducation des enfants"
+    }
+  },
+  "about": {
+    "title": "À propos de M2HC",
+    "subtitle": "Marguerita Holistic Health Center - Une approche holistique pour votre bien-être global",
+    "mission": {
+      "title": "Notre Mission",
+      "text": "Contribuer à l'amélioration du bien-être des individus victimes d'affections diverses, en assurant l'accompagnement et la prise en charge holistique par le biais d'appuis intégrés (éducatif, sanitaire, psychosocial, sportif, ludique, spirituel…). M2HC œuvre à la promotion du développement du capital humain, le renforcement des capacités, le soutien aux initiatives locales et le vivre-ensemble."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "text": "Prémunir et contribuer à libérer l'être humain de l'état de vulnérabilité ou de mal-être grâce à l'approche holistique (mentale, émotionnelle, sociale, spirituelle, psychologique et physique), pour restaurer les équilibres fondamentaux et vivre en harmonie avec soi-même, son environnement et la société."
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "subtitle": "Les principes qui guident nos actions",
+      "dignity": "Dignité humaine",
+      "dignityDesc": "Nous plaçons la valeur de chaque personne au centre de notre accompagnement.",
+      "holistic": "Approche holistique",
+      "holisticDesc": "Nous considérons l'être humain dans toutes ses dimensions : physique, mentale, émotionnelle et sociale.",
+      "empowerment": "Autonomisation",
+      "empowermentDesc": "Nous aidons chacun, en particulier les femmes et les jeunes, à devenir acteur principal de son bien-être.",
+      "empathy": "Empathie et écoute",
+      "empathyDesc": "Nous offrons un accompagnement bienveillant, confidentiel et respectueux.",
+      "equity": "Équité et inclusion",
+      "equityDesc": "Nous œuvrons pour un accès juste et accessible au bien-être pour tous.",
+      "integrity": "Intégrité et professionnalisme",
+      "integrityDesc": "Nous travaillons avec éthique, rigueur et transparence.",
+      "prevention": "Prévention et éducation",
+      "preventionDesc": "Nous privilégions la sensibilisation et la promotion d'un bien-être durable."
+    },
+    "history": {
+      "title": "Notre Histoire"
+    },
+    "axes": {
+      "title": "Nos Axes Stratégiques",
+      "subtitle": "Cinq axes d'intervention pour une prise en charge complète",
+      "earlyChildhood": "Axe Petite Enfance",
+      "earlyChildhoodDesc": "Accompagnement et développement holistique des enfants.",
+      "women": "Axe Femme et Jeune Fille",
+      "womenDesc": "Autonomisation et accompagnement psychosocial des femmes et jeunes filles.",
+      "youth": "Axe Jeunesse",
+      "youthDesc": "Formation, mentorat et développement des capacités des jeunes.",
+      "community": "Axe Communautaire",
+      "communityDesc": "Renforcement du vivre-ensemble et des initiatives locales.",
+      "institutions": "Axe Institutions et Organisations",
+      "institutionsDesc": "Valorisation du bien-être et développement professionnel."
+    },
+    "strengths": {
+      "title": "Nos Forces",
+      "subtitle": "Ce qui nous rend uniques",
+      "respect": "Respect de l'intérêt supérieur de l'être humain dans toutes ses dimensions",
+      "calm": "Cadre apaisant apportant sérénité, paix intérieure et amour nécessaires à la guérison",
+      "team": "Équipe dynamique : médecins, psychologues, religieux, nutritionnistes, sportifs",
+      "coaching": "Coaching et accompagnement personnalisés des patients et des familles"
+    },
+    "achievements": {
+      "title": "Nos Réalisations",
+      "subtitle": "Un impact concret sur le terrain",
+      "partnership": "Partenariat avec MINPROFF (Ministère de la Promotion de la Femme et de la Famille), MINAS (Ministère des Affaires Sociales), MINSANTE (Ministère de la Santé Publique), MINEDUB (Ministère de l'Éducation de Base), ASCOVIME (Association Conjointe pour la Vie Meilleure)",
+      "covid": "Réarmement moral du personnel de santé pendant le Covid-19",
+      "campaigns": "Campagnes de santé holistique en zones rurales (7 localités)",
+      "noso": "Prise en charge holistique des personnes déplacées internes du NOSO",
+      "awareness": "Sensibilisations lors de journées internationales et nationales",
+      "psychosocial": "Accompagnement psychosocial et référencement"
+    },
+    "administration": {
+      "title": "Notre Administration",
+      "subtitle": "Une équipe engagée pour votre bien-être",
+      "honoraryPresident": "Président d'honneur",
+      "honoraryPresidentF": "Présidente d'honneur",
+      "president": "Présidente du Conseil d'administration",
+      "secretary": "Secrétaire Générale",
+      "deputySecretary": "Secrétaire Générale adjointe",
+      "coordinator": "Coordonnateur",
+      "treasurer": "Trésorière",
+      "auditor": "Auditeur Interne",
+      "advisor1": "Conseiller n°1",
+      "advisor2": "Conseiller n°2",
+      "advisor3": "Conseiller n°3",
+      "advisor4": "Conseiller n°4"
+    }
+  },
+  "programs": {
+    "title": "Nos Programmes",
+    "subtitle": "Une approche holistique structurée autour de 5 axes stratégiques pour un accompagnement global",
+    "strategicAxes": "Nos 5 Axes Stratégiques",
+    "strategicAxesSubtitle": "Une prise en charge complète adaptée à chaque population",
+    "interventions": "Nos Interventions",
+    "interventions": "Nos interventions :",
+    "axes": {
+      "seeActions": "Voir nos actions",
+      "earlyChildhood": {
+        "title": "Axe Petite Enfance",
+        "description": "Accompagnement et développement holistique des enfants pour assurer un départ sain dans la vie.",
+        "feature1": "Suivi du développement psychomoteur",
+        "feature2": "Éducation des parents et accompagnement familial",
+        "feature3": "Stimulation précoce et éveil",
+        "feature4": "Prévention et dépistage des affections"
+      },
+      "women": {
+        "title": "Axe Femme et Jeune Fille",
+        "description": "Autonomisation et accompagnement psychosocial des femmes et jeunes filles pour leur épanouissement.",
+        "feature1": "Accompagnement psychosocial et écoute-conseils",
+        "feature2": "Formation et renforcement des capacités",
+        "feature3": "Prévention des violences basées sur le genre",
+        "feature4": "Soutien à l'autonomisation économique"
+      },
+      "youth": {
+        "title": "Axe Jeunesse",
+        "description": "Formation, mentorat et développement des capacités des jeunes pour construire leur avenir.",
+        "feature1": "Orientation et développement personnel",
+        "feature2": "Formations professionnelles et techniques",
+        "feature3": "Mentorat et coaching",
+        "feature4": "Promotion de la santé mentale des jeunes"
+      },
+      "community": {
+        "title": "Axe Communautaire",
+        "description": "Renforcement du vivre-ensemble et soutien aux initiatives locales de développement.",
+        "feature1": "Sensibilisation et causeries éducatives",
+        "feature2": "Campagnes de santé holistique en zones rurales",
+        "feature3": "Activités communautaires intergénérationnelles",
+        "feature4": "Remise de dons et soutien aux populations vulnérables"
+      },
+      "institutions": {
+        "title": "Axe Institutions et Organisations",
+        "description": "Valorisation du bien-être et développement professionnel au sein des structures.",
+        "feature1": "Réarmement moral du personnel",
+        "feature2": "Gestion du stress et bien-être au travail",
+        "feature3": "Formations en approche holistique",
+        "feature4": "Collaboration et partenariats institutionnels"
+      }
+    },
+    "actions": {
+      "title": "Nos Actions",
+      "subtitle": "Un engagement concret sur le terrain",
+      "psychosocial": "Accompagnement Psychosocial",
+      "psychosocialDesc": "Écoute-conseils, référencement et suivi personnalisé",
+      "awareness": "Sensibilisation & Journées",
+      "awarenessDesc": "Causeries éducatives : Fête de la Jeunesse, Journée de la Femme, Journée de l'Enfant Africain, 16 jours d'activisme, Journée du Handicap, Droits de l'Homme, Famille, Femme Africaine",
+      "campaigns": "Campagnes en Zones Rurales",
+      "campaignsDesc": "Interventions holistiques à Mengueme, Mbeng, Makak, Obala, Meyomesala, Ngoantet et Foumban",
+      "community": "Activités Communautaires",
+      "communityDesc": "Événements, remise de dons et prise en charge des personnes déplacées internes du NOSO",
+      "morale": "Réarmement Moral",
+      "moraleDesc": "Formation du personnel de santé (Hôpital Général, Hôpital Central, EPC Djoungolo, Hôpital Militaire)",
+      "seeMore": "Voir plus"
+    },
+    "cta": {
+      "title": "Rejoignez nos programmes",
+      "subtitle": "Ensemble, construisons un avenir plus sain et harmonieux",
+      "contactBtn": "Nous contacter",
+      "donateBtn": "Soutenir nos actions"
+    }
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "subtitle": "Ce que nos bénéficiaires disent de nous",
+    "filter": "Filtrer par",
+    "all": "Tous",
+    "stars5": "5 étoiles",
+    "stars4": "4 étoiles",
+    "recent": "Récents",
+    "shareExperience": "Partagez votre expérience",
+    "shareExperienceDesc": "Votre témoignage peut inspirer et aider d'autres personnes dans leur parcours de guérison",
+    "shareBtn": "Laisser un témoignage",
+    "newTestimonial": "Nouveau témoignage",
+    "yourName": "Votre nom",
+    "yourEmail": "Votre email",
+    "emailNotPublished": "Votre email ne sera pas publié",
+    "yourMessage": "Votre témoignage",
+    "messagePlaceholder": "Partagez votre expérience avec M2HC...",
+    "rating": "Votre évaluation",
+    "photo": "Ajouter une photo (optionnel)",
+    "choosePhoto": "Cliquez pour télécharger une photo",
+    "removePhoto": "Supprimer",
+    "submit": "Envoyer mon témoignage",
+    "cancel": "Annuler",
+    "loading": "Chargement des témoignages...",
+    "submitting": "Envoi en cours...",
+    "success": "Merci pour votre témoignage !",
+    "successMessage": "✅ Merci pour votre témoignage ! Il sera examiné et publié prochainement.",
+    "error": "Une erreur est survenue",
+    "errorConnection": "Erreur de connexion. Veuillez réessayer.",
+    "noTestimonials": "Aucun témoignage trouvé pour ce filtre.",
+    "peopleHelped": "Personnes accompagnées",
+    "averageRating": "Note moyenne",
+    "satisfaction": "Satisfaction"
+  },
+  "blog": {
+    "title": "Blog M2HC",
+    "subtitle": "Actualités, articles et retours d'expérience",
+    "search": "Rechercher un article...",
+    "category": "Catégorie",
+    "all": "Tous",
+    "health": "Santé",
+    "campaigns": "Campagnes",
+    "women": "Femmes",
+    "youth": "Jeunesse",
+    "imageComing": "Image à venir",
+    "readMore": "Lire la suite",
+    "by": "Par",
+    "noArticles": "Aucun article trouvé pour votre recherche.",
+    "newsletterTitle": "Restez informé",
+    "newsletterSubtitle": "Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités",
+    "newsletterBtn": "S'inscrire à la newsletter",
+    "posts": {
+      "post1": {
+        "title": "Réarmement moral du personnel de santé pendant le Covid-19",
+        "excerpt": "M2HC a accompagné le personnel de santé dans les hôpitaux de Yaoundé durant la pandémie pour renforcer leur résilience mentale et émotionnelle.",
+        "author": "M2HC",
+        "date": "15 novembre 2025",
+        "category": "Santé"
+      },
+      "post2": {
+        "title": "Campagne de santé holistique à Mengueme",
+        "excerpt": "Retour sur notre campagne de santé en zone rurale : consultations, sensibilisations et accompagnement psychosocial pour les communautés.",
+        "author": "Équipe M2HC",
+        "date": "10 novembre 2025",
+        "category": "Campagnes"
+      },
+      "post3": {
+        "title": "Journée internationale de la femme : 16 jours d'activisme",
+        "excerpt": "M2HC s'engage contre les violences basées sur le genre avec des causeries éducatives et un accompagnement des femmes victimes.",
+        "author": "Mme BASSOUMBOUL Brigitte",
+        "date": "8 novembre 2025",
+        "category": "Femmes"
+      },
+      "post4": {
+        "title": "L'approche holistique : Une révolution dans la prise en charge",
+        "excerpt": "Découvrez comment M2HC intègre les dimensions physique, mentale, émotionnelle, sociale et spirituelle pour un bien-être complet.",
+        "author": "Mme ENOH Marguerite",
+        "date": "3 novembre 2025",
+        "category": "Santé"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes à votre écoute. N'hésitez pas à nous écrire !",
+    "info": {
+      "phone": "Téléphone",
+      "phoneNumber": "+237 699 412 460",
+      "phoneSubtitle": "Orange Money disponible",
+      "email": "Email",
+      "emailAddress": "mholistichealthcenter@gmail.com",
+      "emailSubtitle": "Réponse sous 24-48h",
+      "bank": "Compte Bancaire",
+      "bankNumber": "679 012 650 01",
+      "bankSubtitle": "Pour vos dons et contributions"
+    },
+    "form": {
+      "title": "Envoyez-nous un message",
+      "subtitle": "Remplissez le formulaire ci-dessous",
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "phone": "Téléphone",
+      "subject": "Objet",
+      "message": "Votre message",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "successMessage": "Message envoyé avec succès! Nous vous répondrons sous 24-48h à votre adresse email.",
+      "errorMessage": "Une erreur est survenue"
+    }
+  }
+}

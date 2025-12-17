@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { brandColors } from '@/lib/theme';
+import { useTranslations } from 'next-intl';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -24,15 +25,10 @@ interface Message {
 }
 
 export default function Chatbot() {
+  const t = useTranslations('chatbot');
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Bonjour ! 👋 Je suis l'assistant virtuel de M2H2. Comment puis-je vous aider aujourd'hui ?",
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string>('');
@@ -54,6 +50,17 @@ export default function Chatbot() {
       inputRef.current?.focus();
     }
   }, [isOpen, isMinimized]);
+
+  // Initialiser les messages avec la traduction
+  useEffect(() => {
+    if (messages.length === 0) {
+      setMessages([{
+        role: 'assistant',
+        content: t('welcome'),
+        timestamp: new Date(),
+      }]);
+    }
+  }, [t]);
 
   // Générer sessionId au premier message
   useEffect(() => {
@@ -124,12 +131,12 @@ export default function Chatbot() {
       // Message d'erreur
       const errorMessage: Message = {
         role: 'assistant',
-        content: "Désolé, une erreur s'est produite. Veuillez réessayer ou contactez-nous à contact@m2h2.org",
+        content: t('errorMessage'),
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
       
-      toast.error('Erreur de connexion');
+      toast.error(t('connectionError'));
     } finally {
       setIsLoading(false);
     }
@@ -146,7 +153,7 @@ export default function Chatbot() {
     setMessages([
       {
         role: 'assistant',
-        content: "Conversation réinitialisée. Comment puis-je vous aider ?",
+        content: t('conversationReset'),
         timestamp: new Date(),
       },
     ]);
@@ -201,10 +208,10 @@ export default function Chatbot() {
                   />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">Assistant M2H2</h3>
+                  <h3 className="font-bold text-lg">{t('title')}</h3>
                   <p className="text-xs text-white/80 flex items-center gap-1">
                     <Sparkles className="w-3 h-3" />
-                    Assistant Intelligent
+                    {t('subtitle')}
                   </p>
                 </div>
               </div>
@@ -289,7 +296,7 @@ export default function Chatbot() {
                       value={inputMessage}
                       onChange={(e) => setInputMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      placeholder="Posez votre question..."
+                      placeholder={t('placeholder')}
                       disabled={isLoading}
                       className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
                     />
@@ -309,7 +316,7 @@ export default function Chatbot() {
                     onClick={clearChat}
                     className="text-xs text-gray-500 hover:text-gray-700 mt-2 transition-colors"
                   >
-                    Nouvelle conversation
+                    {t('newConversation')}
                   </button>
                 </div>
               </>
