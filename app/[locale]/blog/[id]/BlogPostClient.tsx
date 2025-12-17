@@ -1,18 +1,51 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Tag, ArrowLeft } from 'lucide-react';
 import { brandColors } from '@/lib/theme';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import type { BlogPost } from '@/lib/blog-loader';
 
 interface BlogPostClientProps {
-  post: BlogPost;
+  postId: string;
 }
 
-export default function BlogPostClient({ post }: BlogPostClientProps) {
+export default function BlogPostClient({ postId }: BlogPostClientProps) {
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  
+  useEffect(() => {
+    fetch(`/api/blogs/${postId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.post) {
+          setPost(data.post);
+        } else {
+          router.push('/404');
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        router.push('/404');
+      });
+  }, [postId, router]);
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
+  if (!post) {
+    return null;
+  }
   const t = useTranslations('blog');
   const locale = useLocale();
 

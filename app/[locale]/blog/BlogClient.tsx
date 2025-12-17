@@ -10,11 +10,22 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import type { BlogPost } from '@/lib/blog-loader';
 
-interface BlogClientProps {
-  posts: BlogPost[];
-}
-
-export default function BlogClient({ posts }: BlogClientProps) {
+export default function BlogClient() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    fetch('/api/blogs')
+      .then(res => res.json())
+      .then(data => {
+        setPosts(data.posts || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading blogs:', err);
+        setLoading(false);
+      });
+  }, []);
   const t = useTranslations('blog');
   const locale = useLocale();
   const searchParams = useSearchParams();
@@ -74,6 +85,14 @@ export default function BlogClient({ posts }: BlogClientProps) {
     };
     return map[category] || category;
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   return (
     <>
