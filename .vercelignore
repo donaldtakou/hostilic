@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+
+# Testing
+coverage
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Build
+.next
+out
+
+# Misc
+.DS_Store
+*.log
+*.swp
+.vscode
+.idea
+
+# Documentation
+README.md
+docs
+
+# Git
+.git
+.gitignore
