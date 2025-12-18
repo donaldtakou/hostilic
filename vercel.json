@@ -1,20 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
+  "build": {
+    "env": {
+      "NEXT_PRIVATE_SKIP_STATIC_GENERATION": "0"
     }
-  ],
-  "functions": {
-    "app/[locale]/blog/[id]/page.tsx": {
-      "maxDuration": 30,
-      "memory": 1024
-    },
-    "app/[locale]/blog/page.tsx": {
-      "maxDuration": 30,
-      "memory": 1024
-    }
-  },
-  "outputDirectory": ".next"
+  }
 }

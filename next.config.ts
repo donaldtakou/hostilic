@@ -13,10 +13,13 @@ const nextConfig: NextConfig = {
       'node_modules/@swc/core-linux-x64-gnu',
       'node_modules/@swc/core-linux-x64-musl',
       'node_modules/@esbuild/linux-x64',
-      'public/blogs/**/*.png',
-      'public/blogs/**/*.jpg',
-      'public/blogs/**/*.jpeg',
+      './public/blogs/**',
+      'public/blogs/**',
     ],
+  },
+  // Ne pas inclure le dossier blogs dans le output
+  experimental: {
+    outputFileTracingRoot: undefined,
   },
 };
 
