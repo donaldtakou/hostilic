@@ -4,5 +4,14 @@
     "env": {
       "NEXT_PRIVATE_SKIP_STATIC_GENERATION": "0"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/blogs/(.*)",
+      "dest": "/blogs/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    }
+  ]
 }
