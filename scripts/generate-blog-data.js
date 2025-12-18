@@ -41,6 +41,7 @@ function getCategoryFromTitle(title) {
 }
 
 const posts = [];
+const usedIds = new Set();
 
 const folders = fs.readdirSync(blogsDir, { withFileTypes: true })
   .filter(dirent => dirent.isDirectory())
@@ -66,7 +67,16 @@ folders.forEach(folderName => {
         const fileNumber = item.name.replace('.txt', '');
         const imagePath = `/blogs/${folderName}/${fileNumber}.png`;
         
-        const id = `${folderName}-${fileNumber}`.toLowerCase().replace(/\s+/g, '-');
+        // Generate unique ID with counter if duplicate
+        let baseId = `${folderName}-${fileNumber}`.toLowerCase().replace(/\s+/g, '-');
+        let id = baseId;
+        let counter = 1;
+        while (usedIds.has(id)) {
+          id = `${baseId}-${counter}`;
+          counter++;
+        }
+        usedIds.add(id);
+        
         const category = getCategoryFromTitle(content);
         const date = new Date(parsed.year, parsed.month, 1);
         

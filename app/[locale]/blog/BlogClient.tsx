@@ -18,7 +18,12 @@ export default function BlogClient() {
     fetch('/api/blogs')
       .then(res => res.json())
       .then(data => {
-        setPosts(data.posts || []);
+        // Convert date strings to Date objects
+        const postsWithDates = (data.posts || []).map((post: any) => ({
+          ...post,
+          date: new Date(post.date)
+        }));
+        setPosts(postsWithDates);
         setLoading(false);
       })
       .catch(err => {

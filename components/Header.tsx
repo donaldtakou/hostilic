@@ -168,7 +168,7 @@ export default function Header() {
                         ? 'bg-opacity-100 text-white shadow-lg scale-105 ring-2 ring-offset-2' 
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95'
                     }`}
-                    style={locale === 'fr' ? { backgroundColor: brandColors.primary[600], ringColor: brandColors.primary[300] } : {}}
+                    style={locale === 'fr' ? { backgroundColor: brandColors.primary[600] } : {}}
                   >
                     🇫🇷 Français
                   </button>
@@ -179,7 +179,7 @@ export default function Header() {
                         ? 'bg-opacity-100 text-white shadow-lg scale-105 ring-2 ring-offset-2' 
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95'
                     }`}
-                    style={locale === 'en' ? { backgroundColor: brandColors.primary[600], ringColor: brandColors.primary[300] } : {}}
+                    style={locale === 'en' ? { backgroundColor: brandColors.primary[600] } : {}}
                   >
                     🇬🇧 English
                   </button>

@@ -17,6 +17,8 @@ interface BlogPostClientProps {
 export default function BlogPostClient({ postId }: BlogPostClientProps) {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations('blog');
+  const locale = useLocale();
   const router = useRouter();
   
   useEffect(() => {
@@ -24,7 +26,11 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
       .then(res => res.json())
       .then(data => {
         if (data.post) {
-          setPost(data.post);
+          // Convert date string to Date object
+          setPost({
+            ...data.post,
+            date: new Date(data.post.date)
+          });
         } else {
           router.push('/404');
         }
@@ -46,8 +52,6 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
   if (!post) {
     return null;
   }
-  const t = useTranslations('blog');
-  const locale = useLocale();
 
   const formatDate = (date: Date): string => {
     const months = locale === 'fr' 

@@ -6,10 +6,11 @@ export const revalidate = 3600;
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const post = getBlogPostById(params.id);
+    const { id } = await params;
+    const post = getBlogPostById(id);
     
     if (!post) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });

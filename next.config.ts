@@ -15,11 +15,9 @@ const nextConfig: NextConfig = {
       'node_modules/@esbuild/linux-x64',
       './public/blogs/**',
       'public/blogs/**',
+      './public/gallery/**',
+      'public/gallery/**',
     ],
-  },
-  // Ne pas inclure le dossier blogs dans le output
-  experimental: {
-    outputFileTracingRoot: undefined,
   },
 };
 
