@@ -71,6 +71,41 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
     return map[category] || category;
   };
 
+  const translateTitle = (title: string): string => {
+    if (locale === 'fr') return title;
+    
+    // Basic translation of common terms
+    const translations: { [key: string]: string } = {
+      'CELEBRATION DE LA FETE DE LA JEUNESSE': 'YOUTH DAY CELEBRATION',
+      'JOURNEE INTERNATIONALE': 'INTERNATIONAL DAY',
+      'JOURNEE DE LA FEMME AFRICAINE': 'AFRICAN WOMEN\'S DAY',
+      'CAMPAGNE DE SANTE': 'HEALTH CAMPAIGN',
+      'PARTICIPATION': 'PARTICIPATION',
+      'COMMEMORATION': 'COMMEMORATION',
+      'INTERVENTION': 'INTERVENTION',
+      'CONFERENCE': 'CONFERENCE',
+      'DONS AUX ENFANTS': 'DONATIONS TO CHILDREN',
+      'CELEBRATION': 'CELEBRATION',
+      'REMISE DE DONS': 'DONATION CEREMONY',
+      'SENSIBILISATION': 'AWARENESS',
+      'VIOLENCES BASEES SUR LE GENRE': 'GENDER-BASED VIOLENCE',
+      'PERSONNES EN SITUATION DE HANDICAP': 'PERSONS WITH DISABILITIES',
+      'TOLERANCE ZERO': 'ZERO TOLERANCE',
+      'MUTILATIONS GENITALES': 'GENITAL MUTILATION',
+      'LUTTE CONTRE LE VIH': 'FIGHT AGAINST HIV',
+      'DROITS DE L\'HOMME': 'HUMAN RIGHTS',
+      'PRISE EN CHARGE': 'CARE AND SUPPORT',
+    };
+    
+    let translated = title;
+    Object.keys(translations).forEach(key => {
+      const regex = new RegExp(key, 'gi');
+      translated = translated.replace(regex, translations[key]);
+    });
+    
+    return translated;
+  };
+
   return (
     <div className="py-12">
       {/* Back Button */}
@@ -120,7 +155,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            {post.title}
+            {translateTitle(post.title)}
           </motion.h1>
 
           {/* Meta */}

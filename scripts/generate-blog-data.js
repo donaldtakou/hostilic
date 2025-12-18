@@ -66,6 +66,13 @@ folders.forEach(folderName => {
         
         const fileNumber = item.name.replace('.txt', '');
         const imagePath = `/blogs/${folderName}/${fileNumber}.png`;
+        const fullImagePath = path.join(__dirname, '../public', imagePath);
+        
+        // Skip if image doesn't exist
+        if (!fs.existsSync(fullImagePath)) {
+          console.log(`⚠️  Skipping ${folderName}/${fileNumber} - image not found`);
+          return;
+        }
         
         // Generate unique ID with counter if duplicate
         let baseId = `${folderName}-${fileNumber}`.toLowerCase().replace(/\s+/g, '-');

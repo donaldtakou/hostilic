@@ -44,17 +44,6 @@
     "category": "campaigns"
   },
   {
-    "id": "novembre-2024-3",
-    "title": "PRESENTRATION ET VALIDATION DE LA  PROPOSITION DE M2HC SUR L’ENVIRONNEMENT FAMILIAL DE L’ENFANT, POUR AJOUT  AU DOCUMENT DE STRATÉGIE EN COURS D’ÉLABORATION.",
-    "date": "2024-10-31T23:00:00.000Z",
-    "month": "NOVEMBRE",
-    "year": "2024",
-    "folderName": "NOVEMBRE 2024",
-    "imagePath": "/blogs/NOVEMBRE 2024/3.png",
-    "excerpt": "PRESENTRATION ET VALIDATION DE LA  PROPOSITION DE M2HC SUR L’ENVIRONNEMENT FAMILIAL DE L’ENFANT, POUR AJOUT  AU DOCUMENT DE STRATÉGIE EN COURS D’ÉLABO...",
-    "category": "youth"
-  },
-  {
     "id": "septembre-2024-1",
     "title": "DONS AUX ENFANTS DE L’ECOLE DU DIMANCHE DU COLLEGE DES DIACRES DE LA PAROISSE NAZARETH D’OBALA",
     "date": "2024-08-31T22:00:00.000Z",
@@ -121,17 +110,6 @@
     "category": "campaigns"
   },
   {
-    "id": "mars-2024-3",
-    "title": "PRISE EN CHARGE DES PERSONNES EN SITUATION DE HANDICAP.",
-    "date": "2024-02-29T23:00:00.000Z",
-    "month": "MARS",
-    "year": "2024",
-    "folderName": "MARS 2024",
-    "imagePath": "/blogs/MARS 2024/3.png",
-    "excerpt": "PRISE EN CHARGE DES PERSONNES EN SITUATION DE HANDICAP.",
-    "category": "campaigns"
-  },
-  {
     "id": "mars-2024-1",
     "title": "M2HC PREND PART Á LA MARCHE SPORTIVE ORGANISEE PAR LE MINPROFF (Ministère de la Promotion de la Femme et de la Famille).",
     "date": "2024-02-29T23:00:00.000Z",
@@ -141,28 +119,6 @@
     "imagePath": "/blogs/MARS 2024/1.png",
     "excerpt": "M2HC PREND PART Á LA MARCHE SPORTIVE ORGANISEE PAR LE MINPROFF (Ministère de la Promotion de la Femme et de la Famille).",
     "category": "women"
-  },
-  {
-    "id": "mars-2024-4",
-    "title": "COMMÉMORATION DE LA JOURNÉE DE L’ENFANT AFRICAIN",
-    "date": "2024-02-29T23:00:00.000Z",
-    "month": "MARS",
-    "year": "2024",
-    "folderName": "MARS 2024",
-    "imagePath": "/blogs/MARS 2024/4.png",
-    "excerpt": "COMMÉMORATION DE LA JOURNÉE DE L’ENFANT AFRICAIN",
-    "category": "youth"
-  },
-  {
-    "id": "mars-2024-5",
-    "title": "ACTIVITÉS AVEC L’ONG AMÉRICAINE PATIENT EMPOWERMENT NETWORK (PEN), DANS LE CADRE DE LA MISE EN ŒUVRE DE LA CONVENTION DE PARTENARIAT AVEC M2HC.",
-    "date": "2024-02-29T23:00:00.000Z",
-    "month": "MARS",
-    "year": "2024",
-    "folderName": "MARS 2024",
-    "imagePath": "/blogs/MARS 2024/5.png",
-    "excerpt": "ACTIVITÉS AVEC L’ONG AMÉRICAINE PATIENT EMPOWERMENT NETWORK (PEN), DANS LE CADRE DE LA MISE EN ŒUVRE DE LA CONVENTION DE PARTENARIAT AVEC M2HC.",
-    "category": "campaigns"
   },
   {
     "id": "mars-2024-1-1",
@@ -240,17 +196,6 @@
     "imagePath": "/blogs/MARS 2023/2.png",
     "excerpt": "ACTIVITÉ CONCERNANT LA JOURNÉE INTERNATIONALE DES PERSONNES EN SITUATION DE  HANDICAP.",
     "category": "campaigns"
-  },
-  {
-    "id": "mars-2023-3",
-    "title": "PARTICIPATION DE M2HC À LA FOIRE D'EXPOSITION DU MINPROFF (Ministère de la Promotion de la Femme et de la Famille), Á L'OCCASION DE LA JOURNÉE INTERNATIONALE DE LA FEMME.",
-    "date": "2023-02-28T23:00:00.000Z",
-    "month": "MARS",
-    "year": "2023",
-    "folderName": "MARS 2023",
-    "imagePath": "/blogs/MARS 2023/3.png",
-    "excerpt": "PARTICIPATION DE M2HC À LA FOIRE D'EXPOSITION DU MINPROFF (Ministère de la Promotion de la Femme et de la Famille), Á L'OCCASION DE LA JOURNÉE INTERNA...",
-    "category": "women"
   },
   {
     "id": "novembre-2022-1",
@@ -360,28 +305,6 @@
     "folderName": "DECEMBRE 2021",
     "imagePath": "/blogs/DECEMBRE 2021/2.png",
     "excerpt": "ACTIVITE AU SIEGE DE M2HC A L’OCCASION DE LA JOURNÉE INTERNATIONALE DES DROITS DE L’HOMME .",
-    "category": "campaigns"
-  },
-  {
-    "id": "novembre-2021-1",
-    "title": "INTERVENTION DE M2HC LORS D’UNE CONFERENCE EN TURQUIE.",
-    "date": "2021-10-31T23:00:00.000Z",
-    "month": "NOVEMBRE",
-    "year": "2021",
-    "folderName": "NOVEMBRE 2021",
-    "imagePath": "/blogs/NOVEMBRE 2021/1.png",
-    "excerpt": "INTERVENTION DE M2HC LORS D’UNE CONFERENCE EN TURQUIE.",
-    "category": "campaigns"
-  },
-  {
-    "id": "novembre-2021-1-1",
-    "title": "16 JOURS D’ACTIVISME CONTRE LES VBG AU MANSEL HÔTEL",
-    "date": "2021-10-31T23:00:00.000Z",
-    "month": "NOVEMBRE",
-    "year": "2021",
-    "folderName": "NOVEMBRE 2021",
-    "imagePath": "/blogs/NOVEMBRE 2021/1.png",
-    "excerpt": "16 JOURS D’ACTIVISME CONTRE LES VBG AU MANSEL HÔTEL",
     "category": "campaigns"
   },
   {
