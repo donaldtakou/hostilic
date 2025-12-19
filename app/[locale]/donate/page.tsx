@@ -9,9 +9,9 @@ import { useTranslations } from 'next-intl';
 
 // Informations de paiement depuis les variables d'environnement
 const PAYMENT_INFO = {
-  mtn: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_MTN_NUMBER || '+237 690 84 34 32' : '+237 690 84 34 32',
-  orange: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_ORANGE_NUMBER || '+237 690 84 34 32' : '+237 690 84 34 32',
-  card: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_BANK_ACCOUNT || 'Non configuré' : 'Non configuré',
+  mtn: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_MTN_NUMBER || 'Non configuré' : 'Non configuré',
+  orange: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_ORANGE_NUMBER || '+237 699 41 24 60' : '+237 699 41 24 60',
+  card: typeof window !== 'undefined' ? (window as any).ENV?.NEXT_PUBLIC_BANK_ACCOUNT || '67901265001' : '67901265001',
 };
 
 type PaymentMethod = 'MTN' | 'ORANGE' | 'CARD';

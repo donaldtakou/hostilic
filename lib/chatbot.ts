@@ -47,6 +47,8 @@ Pour en savoir plus, visitez [notre page À propos](/about).`,
 **Via le site web**:
 1. Rendez-vous sur [/donate](/donate)
 2. Choisissez votre montant
+3. Paiement en ligne sécurisé
+4. Reçu par email
 
 **Virement bancaire**:
 Compte: **679 012 650 01**
@@ -128,7 +130,7 @@ Email: mholistichealthcenter@gmail.com`,
 
 **Accompagnement Spécialisé**:
 - Personnes en situation de handicap
-- Personnes déplacées internes du NOSO (Nord-Ouest et Sud-Ouest)
+- Personnes déplacées internes (NOSO)
 - Santé mentale et psychologique
 - Soutien nutritionnel
 - Réarmement moral du personnel de santé
@@ -315,7 +317,7 @@ Besoin d'aide? Posez votre question.`,
 **Événements récents**:
 - 16 Jours d'Activisme contre les VBG
 - Journée de la Femme
-- Prise en charge personnes déplacées du NOSO (Nord-Ouest et Sud-Ouest)
+- Prise en charge personnes déplacées NOSO
 - Remise de dons scolaires
 
 Visitez la [Galerie complète](/gallery) pour voir toutes nos photos.`,
