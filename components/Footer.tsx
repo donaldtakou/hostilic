@@ -152,7 +152,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 flex-shrink-0" style={{ color: primaryColor }} />
-                <span className="text-gray-400 text-sm break-all">mholistichealthcenter@gmail.com</span>
+                <span className="text-gray-400 text-sm break-all">contact@m2hc.org</span>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />

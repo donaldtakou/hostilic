@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import Chatbot from "@/components/Chatbot";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
 import "../globals.css";
 
@@ -83,6 +84,7 @@ export default async function LocaleLayout({
               {children}
             </main>
             <Footer />
+            <LanguageSwitcher />
             <Chatbot />
           </AuthProvider>
         </NextIntlClientProvider>
