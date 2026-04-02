@@ -9,10 +9,10 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const stats = [
-  { id: 1, nameKey: "partners", value: "10+", icon: Users },
-  { id: 2, nameKey: "people", value: "1,000+", icon: Heart },
+  { id: 1, nameKey: "partners", value: "20+", icon: Users },
+  { id: 2, nameKey: "people", value: "10,000+", icon: Heart },
   { id: 3, nameKey: "axes", value: "5", icon: Award },
-  { id: 4, nameKey: "zones", value: "7+", icon: TrendingUp },
+  { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp },
 ]
 
 const carouselImages = [
@@ -82,18 +82,18 @@ export default function HomePage() {
   const locale = useLocale();
   const t = useTranslations('home');
   const tNav = useTranslations('nav');
-  
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Auto-play carousel
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
@@ -170,7 +170,7 @@ export default function HomePage() {
               {/* Gradient Overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
-              
+
               {/* Content Overlay */}
               <div className="absolute inset-0 flex items-end">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
@@ -181,8 +181,8 @@ export default function HomePage() {
                     className="max-w-4xl"
                   >
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 drop-shadow-2xl leading-tight">
-                      {locale === 'fr' 
-                        ? carouselImages[currentSlide].titleFr 
+                      {locale === 'fr'
+                        ? carouselImages[currentSlide].titleFr
                         : carouselImages[currentSlide].titleEn}
                     </h1>
                     <div className="h-1.5 w-24 bg-[#8B6F47] rounded-full mb-6 md:mb-8"></div>
@@ -231,11 +231,10 @@ export default function HomePage() {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  currentSlide === index
-                    ? 'w-12 h-3 bg-white shadow-lg'
-                    : 'w-3 h-3 bg-white/40 hover:bg-white/60 backdrop-blur-sm'
-                }`}
+                className={`transition-all duration-300 rounded-full ${currentSlide === index
+                  ? 'w-12 h-3 bg-white shadow-lg'
+                  : 'w-3 h-3 bg-white/40 hover:bg-white/60 backdrop-blur-sm'
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -247,14 +246,14 @@ export default function HomePage() {
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
               className="px-4 py-2 bg-black/30 backdrop-blur-md text-white text-sm rounded-full hover:bg-black/50 transition-all border border-white/20"
             >
-              {isAutoPlaying ? '⏸ Pause' : '▶ Play'}
+              {isAutoPlaying ? '' : ''}
             </button>
           </div>
         </div>
       </section>
 
       {/* Old Carousel Section - REMOVE */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white" style={{display: 'none'}}>
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white" style={{ display: 'none' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -266,8 +265,8 @@ export default function HomePage() {
               {locale === 'fr' ? 'Nos Actions en Images' : 'Our Actions in Pictures'}
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-              {locale === 'fr' 
-                ? 'Découvrez notre engagement envers la santé holistique et le bien-être communautaire' 
+              {locale === 'fr'
+                ? 'Découvrez notre engagement envers la santé holistique et le bien-être communautaire'
                 : 'Discover our commitment to holistic health and community well-being'}
             </p>
           </motion.div>
@@ -293,7 +292,7 @@ export default function HomePage() {
                   />
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  
+
                   {/* Title Overlay */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -302,8 +301,8 @@ export default function HomePage() {
                     className="absolute bottom-0 left-0 right-0 p-6 md:p-10"
                   >
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 drop-shadow-lg">
-                      {locale === 'fr' 
-                        ? carouselImages[currentSlide].titleFr 
+                      {locale === 'fr'
+                        ? carouselImages[currentSlide].titleFr
                         : carouselImages[currentSlide].titleEn}
                     </h3>
                     <div className="h-1 w-20 bg-[#8B6F47] rounded-full"></div>
@@ -334,11 +333,10 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`transition-all duration-300 rounded-full ${
-                    currentSlide === index
-                      ? 'w-12 h-3 bg-[#0D47A1]'
-                      : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
-                  }`}
+                  className={`transition-all duration-300 rounded-full ${currentSlide === index
+                    ? 'w-12 h-3 bg-[#0D47A1]'
+                    : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                    }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
@@ -350,9 +348,9 @@ export default function HomePage() {
                 onClick={() => setIsAutoPlaying(!isAutoPlaying)}
                 className="text-sm text-gray-500 hover:text-[#0D47A1] transition-colors"
               >
-                {isAutoPlaying 
-                  ? (locale === 'fr' ? '⏸ Pause' : '⏸ Pause')
-                  : (locale === 'fr' ? '▶ Lecture automatique' : '▶ Auto-play')}
+                {isAutoPlaying
+                  ? (locale === 'fr' ? '' : '')
+                  : (locale === 'fr' ? '' : '')}
               </button>
             </div>
           </div>
