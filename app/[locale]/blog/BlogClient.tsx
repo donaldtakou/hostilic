@@ -115,6 +115,7 @@ export default function BlogClient() {
       'LUTTE CONTRE LE VIH': 'FIGHT AGAINST HIV',
       'DROITS DE L\'HOMME': 'HUMAN RIGHTS',
       'PRISE EN CHARGE': 'CARE AND SUPPORT',
+      'VISITE D\'INFORMATION': 'INFORMATION VISIT',
     };
     
     let translated = title;

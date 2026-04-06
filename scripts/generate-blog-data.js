@@ -65,17 +65,22 @@ folders.forEach(folderName => {
         if (!content) return;
         
         const fileNumber = item.name.replace('.txt', '');
-        const imagePath = `/blogs/${folderName}/${fileNumber}.png`;
-        const fullImagePath = path.join(__dirname, '../public', imagePath);
+        
+        // Find relative path from public/blogs to image
+        const relativeTxtPath = path.relative(blogsDir, txtPath);
+        const imageRelativePath = relativeTxtPath.replace('.txt', '.png');
+        const imagePath = `/blogs/${imageRelativePath.replace(/\\/g, '/')}`;
+        const fullImagePath = path.join(blogsDir, imageRelativePath);
         
         // Skip if image doesn't exist
         if (!fs.existsSync(fullImagePath)) {
-          console.log(`⚠️  Skipping ${folderName}/${fileNumber} - image not found`);
+          console.log(`⚠️  Skipping ${folderName}/${fileNumber} - image not found at ${fullImagePath}`);
           return;
         }
         
         // Generate unique ID with counter if duplicate
-        let baseId = `${folderName}-${fileNumber}`.toLowerCase().replace(/\s+/g, '-');
+        const fileNamePart = item.name.replace('.txt', '');
+        let baseId = `${folderName}-${fileNamePart}`.toLowerCase().replace(/\s+/g, '-');
         let id = baseId;
         let counter = 1;
         while (usedIds.has(id)) {
