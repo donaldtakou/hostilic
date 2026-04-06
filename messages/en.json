@@ -125,6 +125,11 @@
       "title": "Join our mission",
       "subtitle": "Together, let's work for holistic well-being and a more caring society",
       "contactBtn": "Contact us"
+    },
+    "blog": {
+      "title": "Recent News",
+      "subtitle": "Discover our latest actions and events from the field",
+      "viewAll": "View all blog articles"
     }
   },
   "gallery": {

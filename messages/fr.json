@@ -124,6 +124,11 @@
       "title": "Rejoignez notre mission",
       "subtitle": "Ensemble, œuvrons pour un bien-être holistique et une société plus solidaire",
       "contactBtn": "Nous contacter"
+    },
+    "blog": {
+      "title": "Dernières Actualités",
+      "subtitle": "Découvrez nos dernières actions et événements sur le terrain",
+      "viewAll": "Voir tout le blog"
     }
   },
   "gallery": {
@@ -263,7 +268,6 @@
     "strategicAxes": "Nos 5 Axes Stratégiques",
     "strategicAxesSubtitle": "Une prise en charge complète adaptée à chaque population",
     "interventions": "Nos Interventions",
-    "interventions": "Nos interventions :",
     "axes": {
       "seeActions": "Voir nos actions",
       "earlyChildhood": {

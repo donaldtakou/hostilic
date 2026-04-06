@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button"
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { getAllBlogPosts, BlogPost } from '@/lib/blog-loader'
+import { Calendar, Tag } from 'lucide-react'
 
 const stats = [
   { id: 1, nameKey: "partners", value: "20+", icon: Users },
-  { id: 2, nameKey: "people", value: "10,000+", icon: Heart },
+  { id: 2, nameKey: "people", value: "15,000+", icon: Heart },
   { id: 3, nameKey: "axes", value: "5", icon: Award },
   { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp },
 ]
@@ -79,12 +81,19 @@ const carouselImages = [
 ]
 
 export default function HomePage() {
-  const locale = useLocale();
-  const t = useTranslations('home');
-  const tNav = useTranslations('nav');
+  const t = useTranslations('home')
+  const tNav = useTranslations('nav')
+  const tBlog = useTranslations('blog')
+  const locale = useLocale()
+  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([])
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    const allPosts = getAllBlogPosts()
+    setRecentPosts(allPosts.slice(0, 3))
+  }, [])
 
   // Auto-play carousel
   useEffect(() => {
@@ -426,6 +435,91 @@ export default function HomePage() {
                 </motion.div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Blog Articles Section */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D47A1] mb-4">
+              {t('blog.title')}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600">
+              {t('blog.subtitle')}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
+            {recentPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-48 sm:h-56 overflow-hidden">
+                  <Image
+                    src={post.imagePath}
+                    alt={post.title}
+                    fill
+                    className="object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-[#0D47A1] text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="flex-1 p-6 flex flex-col">
+                  <div className="flex items-center text-gray-400 text-xs sm:text-sm mb-3">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    {new Date(post.date).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })}
+                  </div>
+                  
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2 hover:text-[#0D47A1] transition-colors">
+                    <Link href={`/${locale}/blog`}>
+                      {post.title}
+                    </Link>
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm md:text-base mb-4 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                  
+                  <div className="mt-auto">
+                    <Link 
+                      href={`/${locale}/blog`}
+                      className="inline-flex items-center text-[#8B6F47] font-semibold hover:text-[#6d5638] transition-colors"
+                    >
+                      {tBlog('readMore')}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link href={`/${locale}/blog`}>
+              <Button size="lg" className="bg-[#0D47A1] text-white hover:bg-[#0a3d91] px-8">
+                {t('blog.viewAll')}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

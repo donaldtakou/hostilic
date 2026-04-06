@@ -59,7 +59,7 @@ const heroCarousel = [
 
 const stats = [
   { id: 1, name: "Partenaires actifs", value: "20+", icon: Users },
-  { id: 2, name: "Personnes accompagnées", value: "10,000+", icon: Heart },
+  { id: 2, name: "Personnes accompagnées", value: "15,000+", icon: Heart },
   { id: 3, name: "Axes stratégiques", value: "5", icon: Award },
   { id: 4, name: "Zones d'intervention", value: "50+", icon: TrendingUp },
 ]

@@ -22,7 +22,7 @@ interface Testimonial {
 export default function TestimonialsPage() {
   const t = useTranslations('testimonials')
   const locale = useLocale()
-  
+
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [filter, setFilter] = useState("all")
   const [loading, setLoading] = useState(true)
@@ -31,7 +31,7 @@ export default function TestimonialsPage() {
   const [photoFile, setPhotoFile] = useState<File | null>(null)
   const [photoPreview, setPhotoPreview] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
-  
+
   const filterOptions = [
     { label: t('all'), value: "all" },
     { label: t('stars5'), value: "5" },
@@ -235,7 +235,7 @@ export default function TestimonialsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
           <Card className="text-center hover:shadow-lg transition-shadow">
             <CardContent className="pt-4 md:pt-6 pb-4 md:pb-6">
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2" style={{ color: '#0D47A1' }}>1,000+</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2" style={{ color: '#0D47A1' }}>15,000+</div>
               <p className="text-sm md:text-base text-gray-600">{t('peopleHelped')}</p>
             </CardContent>
           </Card>
@@ -296,11 +296,10 @@ export default function TestimonialsPage() {
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-5 w-5 ${
-                              i < testimonial.rating
+                            className={`h-5 w-5 ${i < testimonial.rating
                                 ? "text-yellow-400 fill-current"
                                 : "text-gray-300"
-                            }`}
+                              }`}
                           />
                         ))}
                       </div>
@@ -343,10 +342,10 @@ export default function TestimonialsPage() {
               <p className="text-white/90 text-base sm:text-lg mb-4 md:mb-6 max-w-2xl mx-auto px-4">
                 {t('shareExperienceDesc')}
               </p>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={() => setShowForm(true)}
-                className="bg-white hover:bg-gray-100 text-sm md:text-base" 
+                className="bg-white hover:bg-gray-100 text-sm md:text-base"
                 style={{ color: '#0D47A1' }}
               >
                 {t('shareBtn')}
@@ -420,11 +419,10 @@ export default function TestimonialsPage() {
                           className="focus:outline-none"
                         >
                           <Star
-                            className={`h-8 w-8 transition-colors ${
-                              star <= formData.rating
+                            className={`h-8 w-8 transition-colors ${star <= formData.rating
                                 ? "text-yellow-400 fill-current"
                                 : "text-gray-300"
-                            }`}
+                              }`}
                           />
                         </button>
                       ))}
