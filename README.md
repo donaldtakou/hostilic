@@ -175,6 +175,12 @@ git push origin main
 - [ ] Chat en temps réel bénéficiaires
 - [ ] Système de prise de rendez-vous médicaux
 
+## 📞 Support & Social Media
+- **Facebook**: [facebook.com/m2hc19](https://www.facebook.com/m2hc19/)
+- **Email**: contact@m2h2.org  
+- **Phone**: +237 699 412 460
+- **Address**: Odza, entrée Kowait, Yaoundé, Cameroun
+
 ## 🙏 Crédits
 Développé avec ❤️ pour **M2HC (Marguerita Holistic Health Center)**.
 

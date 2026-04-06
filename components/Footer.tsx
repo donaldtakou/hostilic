@@ -76,7 +76,9 @@ export default function Footer() {
             </p>
             <div className="flex space-x-3">
               <a 
-                href="#" 
+                href="https://www.facebook.com/m2hc19/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gray-800 p-2 rounded-full transition-colors"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = primaryColor}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1f2937'}
