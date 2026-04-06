@@ -71,7 +71,7 @@ Le système de blog est semi-automatisé. Il génère un registre central à par
 ## 🛠️ Stack Technique
 
 ### Frontend
-- **Next.js 15+** - Framework React moderne (App Router)
+- **Next.js 15+** (App Router)
 - **TypeScript** - Sécurité et typage
 - **Tailwind CSS** - Styling professionnel
 - **Framer Motion** - Animations fluides
@@ -79,11 +79,44 @@ Le système de blog est semi-automatisé. Il génère un registre central à par
 - **next-intl** - Support multi-langues
 - **React Hook Form + Zod** - Formulaires validés
 
-### Backend
+### Backend & UX
 - **Next.js API Routes** - API REST
 - **Prisma** - ORM moderne
-- **PostgreSQL** - Base de données
+- **PostgreSQL** - Base de données (ou MongoDB via Prisma)
 - **NextAuth.js** - Authentification
+- **React Hot Toast** - Notifications
+- **SEO Optimisé** - Meta tags et OpenGraph
+- **Responsive Design** - Mobile-first
+
+## 🎨 Design System
+
+### Couleurs
+- **Primaire**: Bleu M2HC (#0D47A1)
+- **Secondaire**: Or/Bronze (#8B6F47)
+- **Accent**: Rouge/Orange (#E53935)
+- **Succès**: Vert (#4caf50)
+- **Erreur**: Rouge (#f44336)
+
+### Composants UI
+- Buttons (Custom brand variants)
+- Inputs avec validation temps réel
+- Cards interactives avec effets de verre
+- Animations de scroll Framer Motion
+
+## 🔒 Sécurité
+- ✅ Hash bcrypt (12 rounds)
+- ✅ JWT Session handling
+- ✅ Validation Zod serveur & client
+- ✅ Protection CSRF
+- ✅ Sanitization des entrées
+- ✅ Variables d'environnement sécurisées
+
+## 🗄️ Modèles de Base de Données (Prisma)
+- **User** - Gestion des comptes
+- **Donation** - Suivi des dons
+- **Newsletter** - Base d'abonnés
+- **Feedback** - Modération témoignages
+- **BlogPost** - Articles et actualités
 
 ## 📦 Installation Rapide
 
@@ -111,26 +144,39 @@ Ouvrir [http://localhost:3001](http://localhost:3001) 🚀
 
 ## 🚀 Déploiement
 
-Pour déployer vos changements sur GitHub :
+Pour publier vos changements :
 ```bash
 git add .
 git commit -m "Description de vos changements"
 git push origin main
 ```
-Le déploiement est automatique depuis la branche **main**.
 
 ## 📊 Pages Disponibles
-
 | Page | Route | Description |
 |------|-------|-------------|
-| Accueil | `/` | Landing page moderne |
-| À propos | `/about` | Mission et équipe |
-| Programmes | `/programs` | Liste des programmes |
-| Dons | `/donate` | Faire un don |
-| Contact | `/contact` | Formulaire de contact |
-| Témoignages | `/testimonials` | Retours d'expérience |
-| Blog | `/blog` | Articles et Actualités |
+| Accueil | `/` | Hero, Stats, Articles Récents, Valeurs |
+| À propos | `/about` | Notre Mission, Vision et Engagement |
+| Programmes | `/programs` | Liste des 5 axes stratégiques |
+| Dons | `/donate` | Support financier |
+| Contact | `/contact` | Localisation et support |
+| Témoignages | `/testimonials` | Galerie de retours bénéficiaires |
+| Blog | `/blog` | Articles complets et archives |
 
-## 📞 Support
-**Email**: contact@m2h2.org  
-© 2026 M2HC. Développé pour Marguerita Holistic Health Center.
+## 🎯 Prochaines Étapes / Roadmap
+
+### Phase 2
+- [ ] Dashboard administrateur interactif
+- [ ] Système de messagerie interne par zone
+- [ ] Intégration complète Stripe
+- [ ] Mode sombre optionnel
+
+### Phase 3
+- [ ] Application mobile (React Native)
+- [ ] Chat en temps réel bénéficiaires
+- [ ] Système de prise de rendez-vous médicaux
+
+## 🙏 Crédits
+Développé avec ❤️ pour **M2HC (Marguerita Holistic Health Center)**.
+
+---
+© 2026 M2HC. Tous droits réservés.
