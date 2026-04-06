@@ -78,6 +78,16 @@ folders.forEach(folderName => {
           return;
         }
         
+        let postDate = new Date(parsed.year, parsed.month, 1);
+        let title = content;
+        
+        // Support custom date in first line: DATE: YYYY-MM-DD
+        const dateMatch = content.match(/^DATE:\s*(\d{4}-\d{2}-\d{2})\s*\n?([\s\S]*)/);
+        if (dateMatch) {
+          postDate = new Date(dateMatch[1]);
+          title = dateMatch[2].trim();
+        }
+        
         // Generate unique ID with counter if duplicate
         const fileNamePart = item.name.replace('.txt', '');
         let baseId = `${folderName}-${fileNamePart}`.toLowerCase().replace(/\s+/g, '-');
@@ -89,18 +99,17 @@ folders.forEach(folderName => {
         }
         usedIds.add(id);
         
-        const category = getCategoryFromTitle(content);
-        const date = new Date(parsed.year, parsed.month, 1);
+        const category = getCategoryFromTitle(title);
         
         posts.push({
           id,
-          title: content,
-          date: date.toISOString(),
+          title,
+          date: postDate.toISOString(),
           month: folderName.split(' ')[0],
           year: parsed.year.toString(),
           folderName,
           imagePath,
-          excerpt: content.substring(0, 150) + (content.length > 150 ? '...' : ''),
+          excerpt: title.substring(0, 150) + (title.length > 150 ? '...' : ''),
           category
         });
       }
