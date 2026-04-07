@@ -127,6 +127,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
               src={post.imagePath}
               alt={post.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
               className="object-cover"
               priority
             />

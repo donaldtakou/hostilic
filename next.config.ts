@@ -4,6 +4,12 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
+  images: {
+    qualities: [75, 90]
+  },
+  turbopack: {
+    root: process.cwd(),
+  },
   typescript: {
     // Ignorer les erreurs TypeScript durant le build de production
     ignoreBuildErrors: true,

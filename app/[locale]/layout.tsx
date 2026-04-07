@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hostilic.vercel.app'),
   title: "M2HC - Accompagner ensemble les jeunes et les personnes âgées",
   description: "M2HC est une ONG dédiée à l'accompagnement des jeunes et des personnes âgées pour un avenir meilleur et une société plus solidaire.",
   keywords: "ONG, aide sociale, jeunes, personnes âgées, solidarité, accompagnement",
@@ -51,7 +52,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${inter.className} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>

@@ -172,6 +172,7 @@ export default function HomePage() {
                 src={carouselImages[currentSlide].src}
                 alt={carouselImages[currentSlide].alt}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                 className="object-cover"
                 priority={currentSlide === 0}
                 quality={90}
@@ -296,6 +297,7 @@ export default function HomePage() {
                     src={carouselImages[currentSlide].src}
                     alt={carouselImages[currentSlide].alt}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                     className="object-cover"
                     priority={currentSlide === 0}
                   />
@@ -471,6 +473,7 @@ export default function HomePage() {
                     src={post.imagePath}
                     alt={post.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transform hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
