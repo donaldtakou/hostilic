@@ -8,6 +8,19 @@ const nextConfig: NextConfig = {
     // Ignorer les erreurs TypeScript durant le build de production
     ignoreBuildErrors: true,
   },
+  async headers() {
+    return [
+      {
+        source: '/blogs/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
   outputFileTracingExcludes: {
     '*': [
       'node_modules/@swc/core-linux-x64-gnu',
