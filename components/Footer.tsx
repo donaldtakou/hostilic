@@ -86,7 +86,9 @@ export default function Footer() {
                 <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://x.com/HolisticM2hc/status/1430103192860307456" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gray-800 p-2 rounded-full transition-colors"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = primaryColor}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1f2937'}
@@ -102,7 +104,9 @@ export default function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/marguerita-holistic-health-center-268578209/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gray-800 p-2 rounded-full transition-colors"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = primaryColor}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1f2937'}
