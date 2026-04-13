@@ -92,13 +92,17 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    await connectDB();
-
-    // Récupérer l'historique
-    const messages = await ChatMessage.find({ sessionId })
-      .sort({ timestamp: 1 })
-      .select('role content timestamp metadata')
-      .lean();
+    const allMessages = await ChatMessageModel.findAll();
+    const messages = allMessages
+      .filter(m => m.sessionId === sessionId)
+      .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
+      .map(m => ({
+        id: m._id,
+        message: m.message,
+        response: m.response,
+        sessionId: m.sessionId,
+        createdAt: m.createdAt,
+      }));
 
     return NextResponse.json({
       success: true,
@@ -136,14 +140,12 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    await connectDB();
-
-    const result = await ChatMessage.deleteMany({ sessionId });
+    const deletedCount = await ChatMessageModel.deleteBySessionId(sessionId);
 
     return NextResponse.json({
       success: true,
       message: 'Historique supprimé',
-      deletedCount: result.deletedCount,
+      deletedCount,
     });
   } catch (error: any) {
     console.error('Erreur DELETE Chat:', error);

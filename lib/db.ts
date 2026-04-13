@@ -77,7 +77,7 @@ const adminUser: User = {
   _id: 'admin-001',
   name: 'Admin',
   email: 'admin@m2hc.org',
-  password: '$2a$10$YourHashedPasswordHere', // bcrypt hash
+  password: '$2b$10$wKUJe2G5SW..Iz2BGOzo2eGrQDHtj0DUz/v.5J6wZ7DHcoePUXR8u', // Admin@M2HC2024
   role: 'admin',
   createdAt: new Date(),
 };
@@ -310,8 +310,14 @@ export const ChatMessageModel = {
     db.chatMessages.push(newMessage);
     return newMessage;
   },
-  
+
   findAll: async () => db.chatMessages,
+
+  deleteBySessionId: async (sessionId: string): Promise<number> => {
+    const before = db.chatMessages.length;
+    db.chatMessages = db.chatMessages.filter(m => m.sessionId !== sessionId);
+    return before - db.chatMessages.length;
+  },
 };
 
 // Fonction pour réinitialiser la DB (utile pour les tests)

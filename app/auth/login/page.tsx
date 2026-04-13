@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { signIn } from "next-auth/react"
+import { signIn, getSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -43,7 +43,8 @@ export default function LoginPage() {
           toast.error(result.error)
         } else {
           toast.success("Connexion réussie !")
-          router.push("/dashboard")
+          const session = await getSession()
+          router.push((session?.user as any)?.role === "admin" ? "/admin" : "/")
         }
       } else {
         // Register
@@ -63,7 +64,7 @@ export default function LoginPage() {
             password: formData.password,
             redirect: false,
           })
-          router.push("/dashboard")
+          router.push("/")
         } else {
           toast.error(data.error || "Une erreur est survenue")
         }
