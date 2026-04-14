@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
     // Ignorer les erreurs TypeScript durant le build de production
     ignoreBuildErrors: true,
   },
+  webpack: (config, { webpack, nextRuntime }) => {
+    if (nextRuntime === 'edge') {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          __dirname: JSON.stringify('/'),
+        })
+      );
+    }
+    return config;
+  },
   async headers() {
     return [
       {
