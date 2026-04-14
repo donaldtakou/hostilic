@@ -1,17 +1,9 @@
-import path from "path";
-import { fileURLToPath } from "url";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
-const projectDir = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    resolveAlias: {
-      tailwindcss: path.resolve(projectDir, 'node_modules/tailwindcss'),
-    },
-  },
   typescript: {
     // Ignorer les erreurs TypeScript durant le build de production
     ignoreBuildErrors: true,
