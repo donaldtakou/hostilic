@@ -44,9 +44,9 @@ const carouselImages = [
   },
   {
     src: "/gallery/M2HC A LETRANGER/1.jpg",
-    alt: "M2HC à l'International",
-    titleFr: "M2HC à l'International",
-    titleEn: "M2HC Internationally"
+    alt: "Présentation de M2HC au GFAC à Istanbul",
+    titleFr: "Présentation de M2HC au GFAC à Istanbul",
+    titleEn: "M2HC Presentation at GFAC in Istanbul"
   },
   {
     src: "/gallery/M2HC A LETRANGER/2.jpg",

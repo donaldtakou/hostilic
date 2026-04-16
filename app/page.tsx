@@ -22,7 +22,7 @@ const heroCarousel = [
   {
     id: "3",
     image: "/gallery/M2HC A LETRANGER/1.jpg",
-    title: "M2HC à l'International",
+    title: "Présentation de M2HC au GFAC à Istanbul",
     description: "Notre impact au-delà des frontières",
   },
   {

@@ -107,7 +107,7 @@ const galleryFolders: GalleryFolder[] = [
   },
   {
     id: "10",
-    displayName: "M2HC à l'International",
+    displayName: "Présentation de M2HC au GFAC à Istanbul",
     folderPath: "M2HC A L'ETRANGER",
     category: "international",
     count: 4,

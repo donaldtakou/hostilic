@@ -9,6 +9,7 @@ import AuthProvider from "@/components/AuthProvider";
 import Chatbot from "@/components/Chatbot";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 import "../globals.css";
 
 const inter = Inter({ 
@@ -53,6 +54,20 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-T547YJTX8J"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T547YJTX8J');
+          `}
+        </Script>
+      </head>
       <body className={`${inter.className} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>

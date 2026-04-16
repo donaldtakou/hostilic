@@ -311,7 +311,7 @@ Besoin d'aide? Posez votre question.`,
 - Campagnes de Santé Holistique
 - Actions Communautaires
 - M2HC et les Institutions
-- M2HC à l'International
+- Présentation de M2HC au GFAC à Istanbul
 - Programmes Jeunesse et Famille
 
 **Événements récents**:
