@@ -10,6 +10,7 @@ import Chatbot from "@/components/Chatbot";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 const inter = Inter({ 
@@ -18,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hostilic.vercel.app'),
+  metadataBase: new URL('https://m2hc.org'),
   title: "M2HC - Accompagner ensemble les jeunes et les personnes âgées",
   description: "M2HC est une ONG dédiée à l'accompagnement des jeunes et des personnes âgées pour un avenir meilleur et une société plus solidaire.",
   keywords: "ONG, aide sociale, jeunes, personnes âgées, solidarité, accompagnement",
@@ -102,6 +103,7 @@ export default async function LocaleLayout({
             <Footer />
             <LanguageSwitcher />
             <Chatbot />
+            <Analytics />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>
