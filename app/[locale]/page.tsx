@@ -387,76 +387,150 @@ export default function HomePage() {
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
+
+            {/* Carte Mission */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-[#0D47A1] to-[#1976D2] text-white p-6 md:p-8 rounded-2xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl shadow-lg group"
+              style={{ height: '420px' }}
             >
-              <Target className="h-10 w-10 md:h-12 md:w-12 mb-4" />
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('mission.title')}</h3>
-              <p className="text-base md:text-lg leading-relaxed text-white/95">
-                {t('mission.description')}
-              </p>
+              {/* Image de fond */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: "url('/gallery/happy child.jpg')" }}
+              />
+              {/* Dégradé sombre pour lisibilité */}
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.82) 100%)' }} />
+              {/* Flèche — lien vers À propos */}
+              <Link href={`/${locale}/about`} className="absolute top-6 right-6 z-10 w-6 h-6 rounded-full bg-[#212121] flex items-center justify-center shadow-md hover:bg-white hover:text-[#212121] transition-colors duration-200">
+                <ArrowRight className="h-3 w-3 text-white" />
+              </Link>
+              {/* Contenu */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white">{t('mission.title')}</h3>
+                <p className="text-base md:text-lg leading-relaxed text-white/90">{t('mission.description')}</p>
+              </div>
             </motion.div>
 
+            {/* Carte Vision */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-[#8B6F47] to-[#6B5437] text-white p-6 md:p-8 rounded-2xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl shadow-lg group"
+              style={{ height: '420px' }}
             >
-              <Eye className="h-10 w-10 md:h-12 md:w-12 mb-4" />
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('vision.title')}</h3>
-              <p className="text-base md:text-lg leading-relaxed text-white/95">
-                {t('vision.description')}
-              </p>
+              {/* Image de fond */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: "url('/gallery/free human.jpg')" }}
+              />
+              {/* Dégradé sombre pour lisibilité */}
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.82) 100%)' }} />
+              {/* Flèche — lien vers À propos */}
+              <Link href={`/${locale}/about`} className="absolute top-6 right-6 z-10 w-6 h-6 rounded-full bg-[#212121] flex items-center justify-center shadow-md hover:bg-white hover:text-[#212121] transition-colors duration-200">
+                <ArrowRight className="h-3 w-3 text-white" />
+              </Link>
+              {/* Contenu */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white">{t('vision.title')}</h3>
+                <p className="text-base md:text-lg leading-relaxed text-white/90">{t('vision.description')}</p>
+              </div>
             </motion.div>
+
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              return (
-                <motion.div
-                  key={stat.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-center p-4"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-[#0D47A1] rounded-full mb-3 md:mb-4">
-                    <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
-                  </div>
-                  <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0D47A1] mb-1 md:mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-600 text-xs md:text-sm lg:text-base">{t(`stats.${stat.nameKey}`)}</div>
-                </motion.div>
-              )
-            })}
-          </div>
         </div>
       </section>
 
-      {/* Recent Blog Articles Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Stats + Blog — zone double ton */}
+      <section className="relative overflow-hidden">
+
+        {/* ── Fond bleu — stats ── */}
+        <div className="relative bg-[#0D47A1] pt-14 pb-32 md:pt-20 md:pb-40">
+          {/* Cercles décoratifs animés */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D47A1] mb-4">
-              {t('blog.title')}
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600">
-              {t('blog.subtitle')}
-            </p>
-          </motion.div>
+            animate={{ scale: [1, 1.15, 1], opacity: [0.07, 0.13, 0.07] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white pointer-events-none"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.10, 0.05] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            className="absolute -bottom-10 -right-16 w-96 h-96 rounded-full bg-white pointer-events-none"
+          />
+
+          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon
+                return (
+                  <motion.div
+                    key={stat.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15, type: 'spring', stiffness: 90 }}
+                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                    className="text-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 md:p-7"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 + 0.2, type: 'spring', stiffness: 120 }}
+                      className="inline-flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-white/20 rounded-full mb-3"
+                    >
+                      <Icon className="h-5 w-5 md:h-7 md:w-7 text-white" />
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 + 0.35 }}
+                      className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-1"
+                    >
+                      {stat.value}
+                    </motion.div>
+                    <div className="text-blue-200 text-xs md:text-sm font-medium">{t(`stats.${stat.nameKey}`)}</div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Séparateur SVG courbe (double ton) ── */}
+        <div className="relative -mt-1">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full block" style={{ height: '80px' }}>
+            <path d="M0,0 C360,80 1080,80 1440,0 L1440,0 L0,0 Z" fill="#0D47A1" />
+            <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="#F0F4FF" />
+          </svg>
+        </div>
+
+        {/* ── Fond clair — blog ── */}
+        <div className="bg-[#F0F4FF] pt-4 pb-16 md:pb-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
+            >
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="inline-block bg-[#0D47A1] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+              >
+                {t('blog.title')}
+              </motion.span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D47A1] mb-4">
+                {t('blog.subtitle')}
+              </h2>
+            </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
             {recentPosts.map((post, index) => (
@@ -517,59 +591,127 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
             <Link href={`/${locale}/blog`}>
-              <Button size="lg" className="bg-[#0D47A1] text-white hover:bg-[#0a3d91] px-8">
+              <Button size="lg" className="bg-[#0D47A1] text-white hover:bg-[#0a3d91] px-8 shadow-lg hover:shadow-xl transition-all duration-300">
                 {t('blog.viewAll')}
               </Button>
             </Link>
+          </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-12 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D47A1] mb-4">
-              {t('values.title')}
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600">
-              {t('values.subtitle')}
-            </p>
-          </motion.div>
+      {/* Values Section — double ton */}
+      <section className="relative overflow-hidden">
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {values.map((value, index) => {
-              const Icon = value.icon
-              return (
-                <motion.div
-                  key={value.titleKey}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white border-2 border-gray-100 rounded-xl p-6 md:p-8 hover:border-[#0D47A1] hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#8B6F47] to-[#6B5437] rounded-xl mb-4 md:mb-6">
-                    <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
-                    {t(`values.${value.titleKey}`)}
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    {t(`values.${value.descriptionKey}`)}
-                  </p>
-                </motion.div>
-              )
-            })}
+        {/* ── Séparateur SVG : blanc → bleu foncé ── */}
+        <div className="relative -mb-1">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full block" style={{ height: '80px' }}>
+            <path d="M0,80 C480,0 960,0 1440,80 L1440,0 L0,0 Z" fill="#ffffff" />
+            <path d="M0,80 C480,0 960,0 1440,80 L1440,80 L0,80 Z" fill="#0A2F6B" />
+          </svg>
+        </div>
+
+        {/* ── Fond bleu foncé — valeurs ── */}
+        <div className="relative bg-[#0A2F6B] py-16 md:py-24 overflow-hidden">
+
+          {/* Décorations de fond animées */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+            className="absolute -top-32 -right-32 w-96 h-96 rounded-full border border-white/5 pointer-events-none"
+          />
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
+            className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full border border-white/5 pointer-events-none"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.09, 0.04] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white pointer-events-none"
+          />
+
+          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+
+            {/* En-tête */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
+            >
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="inline-block bg-white/15 border border-white/25 text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+              >
+                {t('values.title')}
+              </motion.span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                {t('values.subtitle')}
+              </h2>
+            </motion.div>
+
+            {/* Grille des valeurs */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
+              {values.map((value, index) => {
+                const Icon = value.icon
+                return (
+                  <motion.div
+                    key={value.titleKey}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.12, type: 'spring', stiffness: 85 }}
+                    whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                    className="group relative bg-white/8 backdrop-blur-sm border border-white/15 rounded-2xl p-6 md:p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300"
+                  >
+                    {/* Numéro d'ordre */}
+                    <span className="absolute top-5 right-6 text-white/10 font-extrabold text-5xl select-none leading-none">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    {/* Icône */}
+                    <motion.div
+                      whileHover={{ rotate: 12, scale: 1.1 }}
+                      transition={{ type: 'spring', stiffness: 200 }}
+                      className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white/20 rounded-xl mb-5"
+                    >
+                      <Icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                    </motion.div>
+
+                    {/* Ligne accent */}
+                    <div className="w-8 h-0.5 bg-white/40 mb-4 group-hover:w-14 transition-all duration-300" />
+
+                    <h3 className="text-lg md:text-xl font-bold text-white mb-3">
+                      {t(`values.${value.titleKey}`)}
+                    </h3>
+                    <p className="text-sm md:text-base text-blue-100/80 leading-relaxed">
+                      {t(`values.${value.descriptionKey}`)}
+                    </p>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
         </div>
+
+        {/* ── Séparateur SVG : bleu foncé → bleu vif (CTA) ── */}
+        <div className="relative -mt-1">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full block" style={{ height: '80px' }}>
+            <path d="M0,0 C360,80 1080,80 1440,0 L1440,0 L0,0 Z" fill="#0A2F6B" />
+            <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="#0D47A1" />
+          </svg>
+        </div>
+
       </section>
 
       {/* CTA Section */}
