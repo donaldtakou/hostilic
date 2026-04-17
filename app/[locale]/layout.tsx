@@ -11,6 +11,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 
 const inter = Inter({ 
@@ -104,6 +105,7 @@ export default async function LocaleLayout({
             <LanguageSwitcher />
             <Chatbot />
             <Analytics />
+            <SpeedInsights />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>
