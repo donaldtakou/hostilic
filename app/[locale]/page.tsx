@@ -51,8 +51,8 @@ const carouselImages = [
   {
     src: "/gallery/M2HC A LETRANGER/2.jpg",
     alt: "Partenariats Internationaux M2HC",
-    titleFr: "Partenariats Internationaux",
-    titleEn: "International Partnerships"
+    titleFr: "Intervention de M2HC au GFAC d'Istanbul",
+    titleEn: "M2HC Intervention at GFAC Istanbul"
   },
   {
     src: "/gallery/M2HC A LETRANGER/3.jpg",
