@@ -14,7 +14,7 @@ const stats = [
   { id: 1, nameKey: "partners", value: "20+", icon: Users, href: "about" },
   { id: 2, nameKey: "people", value: "15,000+", icon: Heart, href: "testimonials" },
   { id: 3, nameKey: "axes", value: "5", icon: Award, href: "programs" },
-  { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp, href: "contact" },
+  { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp, href: "gallery" },
 ]
 
 const carouselImages = [

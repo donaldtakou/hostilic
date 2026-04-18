@@ -95,8 +95,10 @@ export default function Footer() {
               >
                 <Twitter className="h-5 w-5" />
               </a>
-              <a 
-                href="#" 
+              <a
+                href="https://www.instagram.com/marguerita_h.h_center?igsh=aG00bWZxb2xueWV4"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gray-800 p-2 rounded-full transition-colors"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = secondaryColor}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1f2937'}
