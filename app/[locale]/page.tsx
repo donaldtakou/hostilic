@@ -11,10 +11,10 @@ import { getAllBlogPosts, BlogPost } from '@/lib/blog-loader'
 import { Calendar, Tag } from 'lucide-react'
 
 const stats = [
-  { id: 1, nameKey: "partners", value: "20+", icon: Users },
-  { id: 2, nameKey: "people", value: "15,000+", icon: Heart },
-  { id: 3, nameKey: "axes", value: "5", icon: Award },
-  { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp },
+  { id: 1, nameKey: "partners", value: "20+", icon: Users, href: "about" },
+  { id: 2, nameKey: "people", value: "15,000+", icon: Heart, href: "testimonials" },
+  { id: 3, nameKey: "axes", value: "5", icon: Award, href: "programs" },
+  { id: 4, nameKey: "zones", value: "50+", icon: TrendingUp, href: "contact" },
 ]
 
 const carouselImages = [
@@ -467,35 +467,36 @@ export default function HomePage() {
               {stats.map((stat, index) => {
                 const Icon = stat.icon
                 return (
-                  <motion.div
-                    key={stat.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15, type: 'spring', stiffness: 90 }}
-                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                    className="text-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 md:p-7"
-                  >
+                  <Link key={stat.id} href={`/${locale}/${stat.href}`} className="block">
                     <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 + 0.2, type: 'spring', stiffness: 120 }}
-                      className="inline-flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-white/20 rounded-full mb-3"
+                      transition={{ delay: index * 0.15, type: 'spring', stiffness: 90 }}
+                      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                      className="text-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 md:p-7 cursor-pointer hover:bg-white/20 transition-colors"
                     >
-                      <Icon className="h-5 w-5 md:h-7 md:w-7 text-white" />
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.15 + 0.2, type: 'spring', stiffness: 120 }}
+                        className="inline-flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-white/20 rounded-full mb-3"
+                      >
+                        <Icon className="h-5 w-5 md:h-7 md:w-7 text-white" />
+                      </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.15 + 0.35 }}
+                        className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-1"
+                      >
+                        {stat.value}
+                      </motion.div>
+                      <div className="text-blue-200 text-xs md:text-sm font-medium">{t(`stats.${stat.nameKey}`)}</div>
                     </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 + 0.35 }}
-                      className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-1"
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-blue-200 text-xs md:text-sm font-medium">{t(`stats.${stat.nameKey}`)}</div>
-                  </motion.div>
+                  </Link>
                 )
               })}
             </div>
