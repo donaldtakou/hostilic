@@ -8,6 +8,7 @@ export interface BlogPost {
   year: string;
   folderName: string;
   imagePath: string;
+  images?: string[];
   excerpt: string;
   category: string;
 }
@@ -20,6 +21,7 @@ interface BlogPostJSON {
   year: string;
   folderName: string;
   imagePath: string;
+  images?: string[];
   excerpt: string;
   category: string;
 }

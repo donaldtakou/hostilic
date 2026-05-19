@@ -119,8 +119,54 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
         </Link>
       </div>
 
-      {/* Hero Image */}
-      {post.imagePath && (
+      {/* Hero Image(s) */}
+      {post.images && post.images.length > 1 ? (
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <div className="flex gap-2 rounded-2xl overflow-hidden" style={{ height: '520px' }}>
+            {/* Grande image à gauche */}
+            <div className="relative flex-1">
+              <Image
+                src={post.images[0]}
+                alt={`${post.title} 1`}
+                fill
+                sizes="50vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+            {/* 3 petites images empilées à droite */}
+            <div className="flex flex-col gap-2 flex-1">
+              <div className="relative flex-1">
+                <Image
+                  src={post.images[1]}
+                  alt={`${post.title} 2`}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative flex-1">
+                <Image
+                  src={post.images[2]}
+                  alt={`${post.title} 3`}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative flex-1">
+                <Image
+                  src={post.images[3]}
+                  alt={`${post.title} 4`}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : post.imagePath ? (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
           <div className="relative h-[300px] md:h-[500px] rounded-2xl overflow-hidden">
             <Image
@@ -133,7 +179,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
             />
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* Content */}
       <article className="container mx-auto px-4 sm:px-6 lg:px-8">
