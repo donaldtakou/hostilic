@@ -11,6 +11,7 @@ export interface BlogPost {
   images?: string[];
   excerpt: string;
   category: string;
+  content?: string;
 }
 
 interface BlogPostJSON {
@@ -24,6 +25,7 @@ interface BlogPostJSON {
   images?: string[];
   excerpt: string;
   category: string;
+  content?: string;
 }
 
 // Plus besoin de MONTH_MAP, parseMonthYear et getCategoryFromTitle

@@ -14,6 +14,84 @@ interface BlogPostClientProps {
   postId: string;
 }
 
+function BlogContent({ content }: { content: string }) {
+  const lines = content.split('\n');
+
+  return (
+    <div className="space-y-4">
+      {lines.map((line, i) => {
+        const imageMatch = line.match(/^\[IMAGE\s*:\s*(.+)\]$/);
+        if (imageMatch) {
+          return (
+            <div
+              key={i}
+              className="my-6 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 flex items-center justify-center text-center px-6 py-8"
+              style={{ minHeight: '180px' }}
+            >
+              <div>
+                <div className="text-4xl mb-3">📷</div>
+                <p className="text-sm text-gray-500 italic">{imageMatch[1]}</p>
+              </div>
+            </div>
+          );
+        }
+
+        if (line.startsWith('# ')) {
+          return (
+            <h1 key={i} className="text-3xl font-bold text-gray-900 mt-10 mb-4 border-b-2 pb-3" style={{ borderColor: '#8B6F47' }}>
+              {line.replace(/^# /, '')}
+            </h1>
+          );
+        }
+
+        if (line.startsWith('## ')) {
+          return (
+            <h2 key={i} className="text-xl font-bold text-gray-800 mt-8 mb-3">
+              {line.replace(/^## /, '')}
+            </h2>
+          );
+        }
+
+        if (line.startsWith('### ')) {
+          return (
+            <h3 key={i} className="text-lg font-semibold text-gray-700 mt-6 mb-2">
+              {line.replace(/^### /, '')}
+            </h3>
+          );
+        }
+
+        if (line === '---') {
+          return <hr key={i} className="my-8 border-gray-200" />;
+        }
+
+        if (line.startsWith('- ')) {
+          const text = line.replace(/^- /, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+          return (
+            <li
+              key={i}
+              className="ml-6 text-gray-700 leading-relaxed list-disc"
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
+          );
+        }
+
+        if (line.trim() === '') {
+          return <div key={i} className="h-2" />;
+        }
+
+        const html = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        return (
+          <p
+            key={i}
+            className="text-gray-700 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export default function BlogPostClient({ postId }: BlogPostClientProps) {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
@@ -223,9 +301,13 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="prose prose-lg max-w-none"
           >
-            <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-wrap">
-              {post.title}
-            </p>
+            {post.content ? (
+              <BlogContent content={post.content} />
+            ) : (
+              <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-wrap">
+                {post.excerpt}
+              </p>
+            )}
           </motion.div>
 
           {/* Share / Back to Blog */}
