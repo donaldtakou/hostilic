@@ -20,6 +20,39 @@ function BlogContent({ content }: { content: string }) {
   return (
     <div className="space-y-4">
       {lines.map((line, i) => {
+        const imageGridMatch = line.match(/^\[IMAGE_GRID:\s*([^\|]+)\|\s*(.+)\]$/);
+        if (imageGridMatch) {
+          const srcs = imageGridMatch[1].split(',').map(s => s.trim());
+          const alt = imageGridMatch[2].trim();
+          if (srcs.length === 2) {
+            return (
+              <div key={i} className="my-6 grid grid-cols-2 gap-2 rounded-xl overflow-hidden" style={{ maxHeight: '400px' }}>
+                {srcs.map((src, j) => (
+                  <img key={j} src={src} alt={`${alt} ${j + 1}`} className="w-full h-full object-cover" style={{ maxHeight: '400px' }} />
+                ))}
+              </div>
+            );
+          }
+          return (
+            <div key={i} className="my-6 grid grid-cols-2 gap-2 rounded-xl overflow-hidden">
+              {srcs.map((src, j) => (
+                <img key={j} src={src} alt={`${alt} ${j + 1}`} className="w-full object-cover rounded-lg" style={{ height: '220px' }} />
+              ))}
+            </div>
+          );
+        }
+
+        const imageSrcMatch = line.match(/^\[IMAGE_SRC:\s*([^\|]+)\|\s*(.+)\]$/);
+        if (imageSrcMatch) {
+          const src = imageSrcMatch[1].trim();
+          const alt = imageSrcMatch[2].trim();
+          return (
+            <div key={i} className="my-6 rounded-xl overflow-hidden" style={{ maxHeight: '480px' }}>
+              <img src={src} alt={alt} className="w-full object-cover rounded-xl" style={{ maxHeight: '480px' }} />
+            </div>
+          );
+        }
+
         const imageMatch = line.match(/^\[IMAGE\s*:\s*(.+)\]$/);
         if (imageMatch) {
           return (
