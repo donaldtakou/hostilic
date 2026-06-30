@@ -245,35 +245,21 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
                 priority
               />
             </div>
-            {/* 3 petites images empilées à droite */}
+            {/* petites images empilées à droite */}
             <div className="flex flex-col gap-2 flex-1">
-              <div className="relative flex-1">
-                <Image
-                  src={post.images[1]}
-                  alt={`${post.title} 2`}
-                  fill
-                  sizes="25vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative flex-1">
-                <Image
-                  src={post.images[2]}
-                  alt={`${post.title} 3`}
-                  fill
-                  sizes="25vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative flex-1">
-                <Image
-                  src={post.images[3]}
-                  alt={`${post.title} 4`}
-                  fill
-                  sizes="25vw"
-                  className="object-cover"
-                />
-              </div>
+              {post.images.slice(1).map((src, j) => (
+                src ? (
+                  <div key={j} className="relative flex-1">
+                    <Image
+                      src={src}
+                      alt={`${post.title} ${j + 2}`}
+                      fill
+                      sizes="25vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : null
+              ))}
             </div>
           </div>
         </div>
