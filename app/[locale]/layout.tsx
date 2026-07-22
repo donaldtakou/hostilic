@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import Chatbot from "@/components/Chatbot";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
@@ -103,6 +104,7 @@ export default async function LocaleLayout({
             </main>
             <Footer />
             <LanguageSwitcher />
+            <WhatsAppButton />
             <Chatbot />
             <Analytics />
             <SpeedInsights />

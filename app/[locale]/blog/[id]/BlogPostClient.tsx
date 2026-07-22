@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Tag, ArrowLeft } from 'lucide-react';
+import { Calendar, Tag, ArrowLeft, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { brandColors } from '@/lib/theme';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
@@ -14,8 +14,33 @@ interface BlogPostClientProps {
   postId: string;
 }
 
-function BlogContent({ content }: { content: string }) {
+function extractImagesFromContent(content: string): string[] {
+  const images: string[] = [];
+  for (const line of content.split('\n')) {
+    const gridMatch = line.match(/^\[IMAGE_GRID:\s*([^\|]+)\|/);
+    if (gridMatch) {
+      images.push(...gridMatch[1].split(',').map(s => s.trim()));
+      continue;
+    }
+    const srcMatch = line.match(/^\[IMAGE_SRC:\s*([^\|]+)\|/);
+    if (srcMatch) {
+      images.push(srcMatch[1].trim());
+    }
+  }
+  return images;
+}
+
+function ZoomOverlay() {
+  return (
+    <span className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+      <Maximize2 className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+    </span>
+  );
+}
+
+function BlogContent({ content, onImageClick }: { content: string; onImageClick: (index: number) => void }) {
   const lines = content.split('\n');
+  let imgIndex = 0;
 
   return (
     <div className="space-y-4">
@@ -24,11 +49,16 @@ function BlogContent({ content }: { content: string }) {
         if (imageGridMatch) {
           const srcs = imageGridMatch[1].split(',').map(s => s.trim());
           const alt = imageGridMatch[2].trim();
+          const startIndex = imgIndex;
+          imgIndex += srcs.length;
           if (srcs.length === 2) {
             return (
               <div key={i} className="my-6 grid grid-cols-2 gap-2 rounded-xl overflow-hidden" style={{ maxHeight: '400px' }}>
                 {srcs.map((src, j) => (
-                  <img key={j} src={src} alt={`${alt} ${j + 1}`} className="w-full h-full object-cover" style={{ maxHeight: '400px' }} />
+                  <button key={j} type="button" onClick={() => onImageClick(startIndex + j)} className="relative group block p-0 border-0 bg-transparent cursor-zoom-in">
+                    <img src={src} alt={`${alt} ${j + 1}`} className="w-full h-full object-cover" style={{ maxHeight: '400px' }} />
+                    <ZoomOverlay />
+                  </button>
                 ))}
               </div>
             );
@@ -36,7 +66,10 @@ function BlogContent({ content }: { content: string }) {
           return (
             <div key={i} className="my-6 grid grid-cols-2 gap-2 rounded-xl overflow-hidden">
               {srcs.map((src, j) => (
-                <img key={j} src={src} alt={`${alt} ${j + 1}`} className="w-full object-cover rounded-lg" style={{ height: '220px' }} />
+                <button key={j} type="button" onClick={() => onImageClick(startIndex + j)} className="relative group block p-0 border-0 bg-transparent cursor-zoom-in" style={{ height: '220px' }}>
+                  <img src={src} alt={`${alt} ${j + 1}`} className="w-full h-full object-cover rounded-lg" />
+                  <ZoomOverlay />
+                </button>
               ))}
             </div>
           );
@@ -46,10 +79,13 @@ function BlogContent({ content }: { content: string }) {
         if (imageSrcMatch) {
           const src = imageSrcMatch[1].trim();
           const alt = imageSrcMatch[2].trim();
+          const index = imgIndex;
+          imgIndex += 1;
           return (
-            <div key={i} className="my-6 rounded-xl overflow-hidden" style={{ maxHeight: '480px' }}>
+            <button key={i} type="button" onClick={() => onImageClick(index)} className="relative group my-6 block w-full p-0 border-0 bg-transparent rounded-xl overflow-hidden cursor-zoom-in" style={{ maxHeight: '480px' }}>
               <img src={src} alt={alt} className="w-full object-cover rounded-xl" style={{ maxHeight: '480px' }} />
-            </div>
+              <ZoomOverlay />
+            </button>
           );
         }
 
@@ -151,7 +187,38 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
         router.push('/404');
       });
   }, [postId, router]);
-  
+
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  const heroImages = useMemo(() => {
+    if (post?.images && post.images.length > 1) return post.images;
+    if (post?.imagePath) return [post.imagePath];
+    return [];
+  }, [post]);
+
+  const contentImages = useMemo(() => extractImagesFromContent(post?.content || ''), [post]);
+
+  const allImages = useMemo(() => [...heroImages, ...contentImages], [heroImages, contentImages]);
+
+  const openLightbox = (index: number) => setLightbox({ images: allImages, index });
+
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setLightbox(null);
+      } else if (e.key === 'ArrowLeft') {
+        setLightbox((prev) => (prev && prev.index > 0 ? { ...prev, index: prev.index - 1 } : prev));
+      } else if (e.key === 'ArrowRight') {
+        setLightbox((prev) => (prev && prev.index < prev.images.length - 1 ? { ...prev, index: prev.index + 1 } : prev));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightbox]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -235,7 +302,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
           <div className="flex gap-2 rounded-2xl overflow-hidden" style={{ height: '520px' }}>
             {/* Grande image à gauche */}
-            <div className="relative flex-1">
+            <button type="button" onClick={() => openLightbox(0)} className="relative group flex-1 block p-0 border-0 cursor-zoom-in">
               <Image
                 src={post.images[0]}
                 alt={`${post.title} 1`}
@@ -244,12 +311,13 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
                 className="object-cover"
                 priority
               />
-            </div>
+              <ZoomOverlay />
+            </button>
             {/* petites images empilées à droite */}
             <div className="flex flex-col gap-2 flex-1">
               {post.images.slice(1).map((src, j) => (
                 src ? (
-                  <div key={j} className="relative flex-1">
+                  <button key={j} type="button" onClick={() => openLightbox(j + 1)} className="relative group flex-1 block p-0 border-0 cursor-zoom-in">
                     <Image
                       src={src}
                       alt={`${post.title} ${j + 2}`}
@@ -257,7 +325,8 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
                       sizes="25vw"
                       className="object-cover"
                     />
-                  </div>
+                    <ZoomOverlay />
+                  </button>
                 ) : null
               ))}
             </div>
@@ -265,7 +334,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
         </div>
       ) : post.imagePath ? (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-          <div className="relative h-[300px] md:h-[500px] rounded-2xl overflow-hidden">
+          <button type="button" onClick={() => openLightbox(0)} className="relative group block w-full h-[300px] md:h-[500px] p-0 border-0 rounded-2xl overflow-hidden cursor-zoom-in">
             <Image
               src={post.imagePath}
               alt={post.title}
@@ -274,7 +343,8 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
               className="object-cover"
               priority
             />
-          </div>
+            <ZoomOverlay />
+          </button>
         </div>
       ) : null}
 
@@ -321,7 +391,7 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
             className="prose prose-lg max-w-none"
           >
             {post.content ? (
-              <BlogContent content={post.content} />
+              <BlogContent content={post.content} onImageClick={(idx) => openLightbox(heroImages.length + idx)} />
             ) : (
               <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-wrap">
                 {post.excerpt}
@@ -369,6 +439,61 @@ export default function BlogPostClient({ postId }: BlogPostClientProps) {
           </Link>
         </div>
       </motion.div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+            onClick={() => setLightbox(null)}
+            aria-label={locale === 'fr' ? 'Fermer' : 'Close'}
+          >
+            <X className="h-8 w-8" />
+          </button>
+
+          {lightbox.index > 0 && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 rounded-full p-3 hover:bg-black/70 transition-all z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightbox((prev) => (prev && prev.index > 0 ? { ...prev, index: prev.index - 1 } : prev));
+              }}
+              aria-label={locale === 'fr' ? 'Image précédente' : 'Previous image'}
+            >
+              <ChevronLeft className="h-8 w-8" />
+            </button>
+          )}
+
+          {lightbox.index < lightbox.images.length - 1 && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 rounded-full p-3 hover:bg-black/70 transition-all z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightbox((prev) => (prev && prev.index < prev.images.length - 1 ? { ...prev, index: prev.index + 1 } : prev));
+              }}
+              aria-label={locale === 'fr' ? 'Image suivante' : 'Next image'}
+            >
+              <ChevronRight className="h-8 w-8" />
+            </button>
+          )}
+
+          {lightbox.images.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm z-10">
+              {lightbox.index + 1} / {lightbox.images.length}
+            </div>
+          )}
+
+          <img
+            src={lightbox.images[lightbox.index]}
+            alt={locale === 'fr' ? 'Image agrandie' : 'Enlarged image'}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
