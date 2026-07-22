@@ -6,7 +6,6 @@ import { routing } from '@/i18n/routing';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
-import Chatbot from "@/components/Chatbot";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Toaster } from "react-hot-toast";
@@ -105,7 +104,6 @@ export default async function LocaleLayout({
             <Footer />
             <LanguageSwitcher />
             <WhatsAppButton />
-            <Chatbot />
             <Analytics />
             <SpeedInsights />
           </AuthProvider>
