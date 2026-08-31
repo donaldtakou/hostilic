@@ -1,5 +1,6 @@
 import BlogPostClient from './BlogPostClient';
 import { getAllBlogPosts } from '@/lib/blog-loader';
+import { setRequestLocale } from 'next-intl/server';
 
 // Force static generation at build time
 export const dynamic = 'force-static';
@@ -26,7 +27,8 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { id } = await params;
-  
+  const { locale, id } = await params;
+  setRequestLocale(locale);
+
   return <BlogPostClient postId={id} />;
 }

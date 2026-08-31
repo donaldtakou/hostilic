@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -50,6 +50,9 @@ export default async function LocaleLayout({
 }) {
   // Attendre les params (Next.js 15)
   const { locale } = await params;
+
+  // Indispensable pour que les pages statiques (generateStaticParams) rendent la bonne locale
+  setRequestLocale(locale);
 
   // Récupérer les messages pour la locale
   const messages = await getMessages();

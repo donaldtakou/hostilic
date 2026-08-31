@@ -3,24 +3,27 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useLocale, useTranslations } from "next-intl"
 import { Menu, X, Heart } from "lucide-react"
 import { Button } from "./ui/button"
 import { brandColors } from "@/lib/theme"
 
 const navigation = [
-  { name: "Accueil", href: "/" },
-  { name: "À propos", href: "/about" },
-  { name: "Programmes", href: "/programs" },
-  { name: "Galerie", href: "/gallery" },
-  { name: "Témoignages", href: "/testimonials" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-]
+  { key: "home", path: "" },
+  { key: "about", path: "/about" },
+  { key: "programs", path: "/programs" },
+  { key: "gallery", path: "/gallery" },
+  { key: "testimonials", path: "/testimonials" },
+  { key: "blog", path: "/blog" },
+  { key: "contact", path: "/contact" },
+] as const
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const locale = useLocale()
+  const t = useTranslations("nav")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +42,7 @@ export default function Header() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 md:space-x-3 group">
+          <Link href={`/${locale}`} className="flex items-center space-x-2 md:space-x-3 group">
             <img 
               src="/logo.jpeg" 
               alt="M2HC Logo" 
@@ -55,30 +58,32 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === item.href
-                    ? ""
-                    : "text-gray-700"
-                }`}
-                style={pathname === item.href ? { color: brandColors.primary[600] } : {}}
-                onMouseEnter={(e) => e.currentTarget.style.color = brandColors.primary[600]}
-                onMouseLeave={(e) => { if (pathname !== item.href) e.currentTarget.style.color = '#374151'; }}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const href = `/${locale}${item.path}`
+              const isActive = pathname === href
+              return (
+                <Link
+                  key={item.key}
+                  href={href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive ? "" : "text-gray-700"
+                  }`}
+                  style={isActive ? { color: brandColors.primary[600] } : {}}
+                  onMouseEnter={(e) => e.currentTarget.style.color = brandColors.primary[600]}
+                  onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = '#374151'; }}
+                >
+                  {t(item.key)}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Link href="/donate">
+            <Link href={`/${locale}/donate`}>
               <Button variant="outline" size="sm" className="text-sm">
                 <Heart className="h-4 w-4 mr-1.5" />
-                Faire un don
+                {t("donate")}
               </Button>
             </Link>
           </div>
@@ -100,26 +105,28 @@ export default function Header() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 space-y-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`block px-4 py-2 rounded-lg text-base font-medium transition-colors ${
-                  pathname === item.href
-                    ? "text-white"
-                    : "text-gray-700 hover:bg-gray-50"
-                }`}
-                style={pathname === item.href ? { backgroundColor: brandColors.primary[600] } : {}}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const href = `/${locale}${item.path}`
+              const isActive = pathname === href
+              return (
+                <Link
+                  key={item.key}
+                  href={href}
+                  className={`block px-4 py-2 rounded-lg text-base font-medium transition-colors ${
+                    isActive ? "text-white" : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                  style={isActive ? { backgroundColor: brandColors.primary[600] } : {}}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t(item.key)}
+                </Link>
+              )
+            })}
             <div className="pt-4 space-y-2">
-              <Link href="/donate" className="block">
+              <Link href={`/${locale}/donate`} className="block">
                 <Button variant="outline" fullWidth>
                   <Heart className="h-4 w-4 mr-2" />
-                  Faire un don
+                  {t("donate")}
                 </Button>
               </Link>
             </div>
